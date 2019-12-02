@@ -1,4 +1,4 @@
-package gi;
+package ginterface;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;

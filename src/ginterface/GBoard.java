@@ -1,4 +1,4 @@
-package gi;
+package ginterface;
 import java.awt.*;
 import javax.swing.JFrame;
 
