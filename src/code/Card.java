@@ -2,7 +2,8 @@ package code;
 
 import java.util.ArrayDeque;
 
-import gi.GBoard;
+import ginterface.GBoard;
+import ginterface.GDiscard;
 
 public class Card {
 

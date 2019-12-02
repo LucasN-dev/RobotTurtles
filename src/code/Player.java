@@ -4,10 +4,10 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import gi.GEndTurnChoice;
-import gi.GCompleteProgram;
-import gi.GDiscard;
-import gi.GBoard;
+import ginterface.GEndTurnChoice;
+import ginterface.GCompleteProgram;
+import ginterface.GDiscard;
+import ginterface.GBoard;
 
 public class Player {
 

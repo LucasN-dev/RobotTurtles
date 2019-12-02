@@ -2,8 +2,8 @@ package code;
 
 import java.util.ArrayDeque;
 
-import gi.GBoard;
-import gi.GCompleteProgram;
+import ginterface.GBoard;
+import ginterface.GCompleteProgram;
 
 public class Program {
 

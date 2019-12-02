@@ -3,12 +3,12 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import gi.GPlayersNumberButton;
-import gi.GCompleteProgram;
-import gi.GDiscard;
-import gi.GErrorNoMoreCards;
-import gi.GBoard;
-import gi.GPlayerTurn;
+import ginterface.GPlayersNumberButton;
+import ginterface.GCompleteProgram;
+import ginterface.GDiscard;
+import ginterface.GErrorNoMoreCards;
+import ginterface.GBoard;
+import ginterface.GPlayerTurn;
 
 public class Main {
 
@@ -16,7 +16,7 @@ public class Main {
 																			// choix du nb de joueurs
 
 		// initialisation joueurs
-		GPlayersNumberButton.main(args);
+		ginterface.GPlayersNumberButton.main(args);
 
 		ArrayList<Player> Joueurs = new ArrayList<Player>();
 
