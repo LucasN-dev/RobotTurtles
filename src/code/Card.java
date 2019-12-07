@@ -246,6 +246,146 @@ public class Card {
 			instructions.remove();
 
 		}
+
+		else if ((this.getType().equals("LaserCard"))) {
+			int[] targetPosition = { position[0], position[1] };
+			boolean laserOutOfBoard = false;
+			switch (orientation) {
+			case 'N':
+				try {
+					targetPosition[0] = targetPosition[0] - 1;
+					while (board[targetPosition[0]][targetPosition[1]].equals("      ")) {
+						targetPosition[0] = targetPosition[0] - 1;
+					}
+				} catch (Exception e) {
+					// case where the laser gets out of the board, nothing happens
+					laserOutOfBoard = true;
+
+				}
+				break;
+			case 'S':
+				try {
+					targetPosition[0] = targetPosition[0] + 1;
+					while (board[targetPosition[0]][targetPosition[1]].equals("      ")) {
+						targetPosition[0] = targetPosition[0] + 1;
+					}
+				} catch (Exception e) {
+					// case where the laser gets out of the board, nothing happens
+					laserOutOfBoard = true;
+
+				}
+
+				break;
+			case 'E':
+
+				try {
+					targetPosition[1] = targetPosition[1] + 1;
+					while (board[targetPosition[0]][targetPosition[1]].equals("      ")) {
+						targetPosition[1] = targetPosition[1] + 1;
+					}
+				} catch (Exception e) {
+					// case where the laser gets out of the board, nothing happens
+					laserOutOfBoard = true;
+
+				}
+				break;
+			case 'W':
+				try {
+					targetPosition[1] = targetPosition[1] - 1;
+					while (board[targetPosition[0]][targetPosition[1]].equals("      ")) {
+						targetPosition[1] = targetPosition[1] - 1;
+					}
+				} catch (Exception e) {
+					// case where the laser gets out of the board, nothing happens
+					laserOutOfBoard = true;
+
+				}
+				break;
+
+			}
+			System.out.print(targetPosition[0] + " ");
+			System.out.println(targetPosition[1]);
+			if (!laserOutOfBoard) {
+				try {
+					if (((StoneWall) board[targetPosition[0]][targetPosition[1]]).getType().equals("StoneWall")) {
+						// the laser hits the wall and does nothing
+					}
+
+				} catch (Exception e) {
+					// if it's not a stone wall we carry on other cases
+					try {
+						if (((IceWall) board[targetPosition[0]][targetPosition[1]]).getType().equals("IceWall")) {
+							// if it's an ice wall it gets destroyed
+							board[targetPosition[0]][targetPosition[1]] = "      ";
+						}
+
+					} catch (Exception e2) {
+						// if it's not an ice wall we carry on other cases
+						try {
+							String turtleType = ((TurtleTile) board[targetPosition[0]][targetPosition[1]]).getType();
+							if (turtleType.equals("PurpleTurtle") || turtleType.equals("GreenTurtle")
+									|| turtleType.equals("RedTurtle") || turtleType.equals("BlueTurtle")) {
+								// if it's a turtle, it depends on the number o players
+								if (GameSettings.numberPlayers == 2) {
+									System.out.println("ok4");
+									// switch case depending on the turtle current orientation, as it has to turn
+									// around
+									switch (GameSettings.turtlesOrientations.get(turtleType)) {
+									case 'N':
+										GameSettings.turtlesOrientations.put(turtleType, 'S');
+										break;
+									case 'S':
+										GameSettings.turtlesOrientations.put(turtleType, 'N');
+										break;
+									case 'E':
+										GameSettings.turtlesOrientations.put(turtleType, 'W');
+										break;
+									case 'W':
+										GameSettings.turtlesOrientations.put(turtleType, 'E');
+										break;
+
+									}
+
+								}
+								// if there are more than two players, we put the turtle back to its starting
+								// position
+								else {
+									GameSettings.updateTurtlePosition(turtleType,
+											GameSettings.turtlesStartingPositions.get(turtleType)[0],
+											GameSettings.turtlesStartingPositions.get(turtleType)[1]);
+									GameSettings.updateTurtleOrientation(turtleType, 'S');
+									board[GameSettings.turtlesStartingPositions
+											.get(turtleType)[0]][GameSettings.turtlesStartingPositions
+													.get(turtleType)[1]] = board[targetPosition[0]][targetPosition[1]];
+
+									board[targetPosition[0]][targetPosition[1]] = "      ";
+								}
+							}
+
+						} catch (Exception e3) {
+							// last possibility : it's a jewel, the laser gets reflected and the turtle goes
+							// back to its starting place
+							board[position[0]][position[1]] = "      ";
+							
+							GameSettings.updateTurtlePosition(p.getTurtle().getType(),
+									GameSettings.turtlesStartingPositions.get(p.getTurtle().getType())[0],
+									GameSettings.turtlesStartingPositions.get(p.getTurtle().getType())[1]);
+							GameSettings.updateTurtleOrientation(p.getTurtle().getType(), 'S');
+
+							board[GameSettings.turtlesStartingPositions
+									.get(p.getTurtle().getType())[0]][GameSettings.turtlesStartingPositions
+											.get(p.getTurtle().getType())[1]] = p.getTurtle();
+
+							
+						}
+
+					}
+
+				}
+			}
+			p.discardDeck.add(this);
+			instructions.remove();
+		}
 	}
 
 }

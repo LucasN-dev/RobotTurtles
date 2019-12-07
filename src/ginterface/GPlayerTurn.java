@@ -49,7 +49,7 @@ public class GPlayerTurn {
 		f.add(b3);
 		
 		
-		JButton bTortue = new JButton(new ImageIcon("src/images/"+j.getTortue().getType()+"/S.png"));
+		JButton bTortue = new JButton(new ImageIcon("src/images/"+j.getTurtle().getType()+"/S.png"));
 		bTortue.setBounds(890 , 40, 98, 98);
 		bTortue.setRolloverEnabled(false);
 		bTortue.setBorderPainted(false);

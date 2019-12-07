@@ -28,7 +28,7 @@ public class Player {
 		this.turtle = playerTurtle;
 	}
 
-	public TurtleTile getTortue() {
+	public TurtleTile getTurtle() {
 		return this.turtle;
 	}
 
