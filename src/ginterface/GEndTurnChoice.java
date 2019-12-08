@@ -48,13 +48,13 @@ public class GEndTurnChoice {
 		b2.setBounds(553, 450, 270, 50);
 		f.add(b2);
 
-		f.setSize(1000, 600);
+		
 
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		int x = (int) ((dimension.getWidth() - f.getWidth()) / 2);
-		int y = (int) ((dimension.getHeight() - f.getHeight()) / 2);
+		int x = (int) ((dimension.getWidth() - f.getWidth()) / 2.2);
+		int y = (int) ((dimension.getHeight() - f.getHeight()) / 4.2);
 		f.setLocation(x, y);
-
+		f.setSize(1000, 600);
 		f.setLayout(null);
 		f.setVisible(true);
 

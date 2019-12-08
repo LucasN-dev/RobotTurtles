@@ -385,7 +385,7 @@ public class Card {
 			p.discardDeck.add(this);
 			instructions.remove();
 			
-			//below that line, instructions for the laser on th GI
+			//below that line, instructions for the laser on the GI
 			GameSettings.drawLaser = true;
 			
 			GameSettings.laserOrientation=orientation;

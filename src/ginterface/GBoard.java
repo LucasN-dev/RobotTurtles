@@ -52,8 +52,6 @@ public class GBoard extends Canvas {
 		}
 
 		if (GameSettings.drawLaser) {
-			
-			
 
 			if (GameSettings.laserGIPosition[0] >= 0 && GameSettings.laserGIPosition[0] < 8
 					&& GameSettings.laserGIPosition[1] >= 0 && GameSettings.laserGIPosition[1] < 8) {
@@ -64,18 +62,24 @@ public class GBoard extends Canvas {
 			} else if (GameSettings.laserGIPosition[0] == -1 && GameSettings.laserGIPosition[1] < 8) {
 				Image laser = t.getImage("src/images/Laser/" + GameSettings.laserOrientation + ".gif");
 				g.drawImage(laser, giPosistions[GameSettings.laserGIPosition[1]], -56, this);
-				
+
 			}
 
 			else if (GameSettings.laserGIPosition[0] < 8 && GameSettings.laserGIPosition[1] == -1) {
 				Image laser = t.getImage("src/images/Laser/" + GameSettings.laserOrientation + ".gif");
 				g.drawImage(laser, -56, giPosistions[GameSettings.laserGIPosition[0]], this);
-				
+
 			}
 
 		}
+		// next part is very important
+		else {
+			Image laser = t.getImage("src/images/Laser/" + GameSettings.laserOrientation + ".gif");
+			g.drawImage(laser, -1000, -1000, this);
+			laser.flush(); // the flush is necesary to reset the loop counter of the gif because it runs
+							// only onceto avoid other bugs
+		}
 
-		
 	}
 
 	public static void updateGI() {
@@ -84,7 +88,6 @@ public class GBoard extends Canvas {
 		f.add(m);
 		f.setSize(917, 949);
 		f.setVisible(true);
-		
 
 	}
 

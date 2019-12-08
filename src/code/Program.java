@@ -45,7 +45,8 @@ public class Program {
 				GameSettings.drawLaser = false;
 				GBoard.updateGI();
 			}
-
+			
+			
 		}
 
 		// GestionJeu.updateDirectionTortue(this.Tortue.getType(), direction);
