@@ -260,6 +260,7 @@ public class Card {
 				} catch (Exception e) {
 					// case where the laser gets out of the board, nothing happens
 					laserOutOfBoard = true;
+					GBoard.updateLaserGi(orientation,position);
 
 				}
 				break;
@@ -272,6 +273,7 @@ public class Card {
 				} catch (Exception e) {
 					// case where the laser gets out of the board, nothing happens
 					laserOutOfBoard = true;
+					GBoard.updateLaserGi(orientation,position);
 
 				}
 
@@ -286,6 +288,7 @@ public class Card {
 				} catch (Exception e) {
 					// case where the laser gets out of the board, nothing happens
 					laserOutOfBoard = true;
+					GBoard.updateLaserGi(orientation,position);
 
 				}
 				break;
@@ -313,7 +316,6 @@ public class Card {
 				try {
 					if (((StoneWall) board[targetPosition[0]][targetPosition[1]]).getType().equals("StoneWall")) {
 						// the laser hits the wall and does nothing
-						
 						GBoard.updateLaserGi(orientation,position);
 					}
 
