@@ -1,5 +1,9 @@
 package ginterface;
+
 import java.awt.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import code.GameSettings;
@@ -15,8 +19,6 @@ public class GBoard extends Canvas {
 	public static GBoard m = new GBoard();
 
 	public void paint(Graphics g) {
-		
-		
 
 		Object[][] board = Board.board;
 		Toolkit t = Toolkit.getDefaultToolkit();
@@ -29,7 +31,7 @@ public class GBoard extends Canvas {
 				if (board[i][j].getClass() == TurtleTile.class) {
 					String turtle = ((TurtleTile) board[i][j]).getType();
 					char orientation = GameSettings.turtlesOrientations.get(turtle);
-					Image im = t.getImage("src/images/" + turtle +"/"+ orientation + ".png");
+					Image im = t.getImage("src/images/" + turtle + "/" + orientation + ".png");
 					g.drawImage(im, giPosistions[j], giPosistions[i], this);
 				}
 
@@ -46,20 +48,43 @@ public class GBoard extends Canvas {
 				}
 
 			}
-			// System.out.println("");
+
+		}
+		
+		
+
+		if (GameSettings.drawLaser) {
+			
+			if (GameSettings.laserGIPosition[0] >= 0 && GameSettings.laserGIPosition[0] < 8
+					&& GameSettings.laserGIPosition[1] >= 0 && GameSettings.laserGIPosition[1] < 8) {
+				System.out.println(GameSettings.laserGIPosition[0] + " " + GameSettings.laserGIPosition[1]);
+				
+				Image laser = t.getImage("src/images/Laser/" + GameSettings.laserOrientation + ".gif");
+				g.drawImage(laser, giPosistions[GameSettings.laserGIPosition[1]],
+						giPosistions[GameSettings.laserGIPosition[0]], this);
+			}
+			else if (GameSettings.laserGIPosition[0] == -1 && GameSettings.laserGIPosition[1] < 8) {
+				Image laser = t.getImage("src/images/Laser/" + GameSettings.laserOrientation + ".gif");
+				g.drawImage(laser, giPosistions[GameSettings.laserGIPosition[1]],-56, this);
+				System.out.println("1111");
+			}
+			else if (GameSettings.laserGIPosition[0] < 8 && GameSettings.laserGIPosition[1] == -1 ) {
+				Image laser = t.getImage("src/images/Laser/" + GameSettings.laserOrientation + ".gif");
+				g.drawImage(laser, -56,GameSettings.laserGIPosition[0], this);
+				System.out.println("2222");
+			}
 
 		}
 
 	}
-	
+
 	public static void updateGI() {
 		f.getContentPane().removeAll();
 		f.repaint();
 		f.add(m);
 		f.setSize(917, 949);
 		f.setVisible(true);
-		
-		
+
 	}
 
 	public static void initializeBoardGI() {

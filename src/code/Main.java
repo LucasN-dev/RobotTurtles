@@ -16,7 +16,7 @@ public class Main {
 																			// choix du nb de joueurs
 
 		// initialisation joueurs
-		ginterface.GPlayersNumberButton.main(args);
+		GPlayersNumberButton.main(args);
 
 		ArrayList<Player> Joueurs = new ArrayList<Player>();
 

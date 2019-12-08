@@ -20,6 +20,13 @@ public class GameSettings {
 	public static int playerChoice; // 1 commpleter prog, 2 placer un mur, 3 exectuer prog
 
 	public static boolean victory;
+	
+	//*** variables for laser GI ***
+	public static boolean drawLaser=false;
+	public static int[] laserGIPosition= {0,0};
+	public static char laserOrientation = 'S';
+	//***  ***
+	
 
 	public static int getNumberOfPlayers() {
 		return numberPlayers;

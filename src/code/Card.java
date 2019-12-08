@@ -366,7 +366,7 @@ public class Card {
 							// last possibility : it's a jewel, the laser gets reflected and the turtle goes
 							// back to its starting place
 							board[position[0]][position[1]] = "      ";
-							
+
 							GameSettings.updateTurtlePosition(p.getTurtle().getType(),
 									GameSettings.turtlesStartingPositions.get(p.getTurtle().getType())[0],
 									GameSettings.turtlesStartingPositions.get(p.getTurtle().getType())[1]);
@@ -376,7 +376,6 @@ public class Card {
 									.get(p.getTurtle().getType())[0]][GameSettings.turtlesStartingPositions
 											.get(p.getTurtle().getType())[1]] = p.getTurtle();
 
-							
 						}
 
 					}
@@ -385,6 +384,31 @@ public class Card {
 			}
 			p.discardDeck.add(this);
 			instructions.remove();
+			
+			//below that line, instructions for the laser on th GI
+			GameSettings.drawLaser = true;
+			
+			GameSettings.laserOrientation=orientation;
+			GameSettings.laserGIPosition[0] = position[0];
+			GameSettings.laserGIPosition[1] = position[1];
+
+			// below that point, GI informations
+			switch (orientation) {
+			
+			// we have -2 because the laser image is two blocks long
+			case 'N':
+				GameSettings.laserGIPosition[0] = GameSettings.laserGIPosition[0] - 2;
+				break;
+			case 'S':
+				GameSettings.laserGIPosition[0] = GameSettings.laserGIPosition[0] + 1;
+				break;
+			case 'E':
+				GameSettings.laserGIPosition[1] = GameSettings.laserGIPosition[1] + 1;
+				break;
+			case 'W':
+				GameSettings.laserGIPosition[1] = GameSettings.laserGIPosition[1] - 2;
+				break;
+			}
 		}
 	}
 
