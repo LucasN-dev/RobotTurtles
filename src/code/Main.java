@@ -1,4 +1,5 @@
 package code;
+
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -78,7 +79,7 @@ public class Main {
 			J.setHand();
 			Program program = new Program();
 			J.setProgram(program);
-			
+
 		}
 
 		/**
@@ -91,7 +92,7 @@ public class Main {
 			for (int i = 0; i < Joueurs.size(); i++) {
 
 				System.out.println("C'est au joueur " + (i + 1) + " de jouer");
-				
+
 				Player J = Joueurs.get(i);
 
 				new GPlayerTurn(i + 1, J);
@@ -102,8 +103,6 @@ public class Main {
 					// que le nombre de joueurs soit choisi pour passer a la suite)
 				}
 
-				
-
 				for (int k = 0; k < J.getHand().size(); k++) {
 					System.out.println(J.getHand().get(k).getType());
 				}
@@ -112,7 +111,7 @@ public class Main {
 
 				case 1:
 					GCompleteProgram.completed = false; // si on met pas ça on rentre jamais dans la boucle après la
-															// première iteration
+														// première iteration
 					while (!GCompleteProgram.completed) {
 
 						J.program.completeProgram(J);
@@ -124,73 +123,64 @@ public class Main {
 					break;
 
 				case 3:
-					J.program.runProgram(Plateau,J);
+					J.program.runProgram(Plateau, J);
 					break;
 
 				}
 
-				//pour test
+				// pour test
 				Plateau.printBoard();
-				
-				
-				
 
-				if (J.hand.size()!=0) {
+				if (J.hand.size() != 0) {
 					J.endTurnChoice();
-				}
-				else {
-					GameSettings.playerChoice=2;
+				} else {
+					GameSettings.playerChoice = 2;
 				}
 
 				switch (GameSettings.playerChoice) {
 
 				case 1:
-					GDiscard.completed=false;
-					
+					GDiscard.completed = false;
+
 					while (!GDiscard.completed) {
 						J.discardHand();
 					}
-					
+
 					break;
 
 				case 2:
-					//rien
+					// rien
 					break;
 				}
-				
-				
-				if (J.deck.size()<(5-J.hand.size())) {
-					//on transfere la pile de discard vers la pioche s'il reste moins
-					//de carte dans la pioche que de carte à piocher
+
+				if (J.deck.size() < (5 - J.hand.size())) {
+					// on transfere la pile de discard vers la pioche s'il reste moins
+					// de carte dans la pioche que de carte à piocher
 					J.discardDeckToDeck();
 					System.out.println("Transfert de cartes");
 				}
-				
-				if (J.deck.size()==0 && J.discardDeck.size()==0) {
-					GErrorNoMoreCards.closed=false;
+
+				if (J.deck.size() == 0 && J.discardDeck.size() == 0) {
+					GErrorNoMoreCards.closed = false;
 					new GErrorNoMoreCards();
-					
+
 					while (!GErrorNoMoreCards.closed) {
 						Thread.sleep(300);
 					}
 				}
-				
+
 				else {
 					J.drawCards();
 				}
 
-				
-				
-				
-				
-				
-				
-				System.out.println("Main "+J.hand.size());
-				System.out.println("Pioche "+J.deck.size());
-				System.out.println("Discard "+J.discardDeck.size());
+				System.out.println("Main " + J.hand.size());
+				System.out.println("Pioche " + J.deck.size());
+				System.out.println("Discard " + J.discardDeck.size());
 			}
 		}
 
+		
+		
 	}
 
 }

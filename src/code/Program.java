@@ -34,22 +34,10 @@ public class Program {
 
 			Thread.sleep(500);
 			GBoard.updateGI();
-
-			// in case there's a laser being shot, we wait 1sec then stop trying to render
-			// it.
-			// it is nevertheless important to have a gif file that only runs once (that's
-			// one parameter of gif files). If not the frame will keep refreshing even
-			// though the gif's removed
-			if (GameSettings.drawLaser) {
-				Thread.sleep(1000);
-				GameSettings.drawLaser = false;
-				GBoard.updateGI();
-			}
 			
 			
 		}
 
-		// GestionJeu.updateDirectionTortue(this.Tortue.getType(), direction);
 
 	}
 

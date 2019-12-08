@@ -17,7 +17,7 @@ public class Card {
 		return this.type;
 	}
 
-	public void runCard(Object[][] board, Player p) {
+	public void runCard(Object[][] board, Player p) throws InterruptedException {
 
 		ArrayDeque<Card> instructions = p.program.getProgram();
 		int[] position = GameSettings.turtlesPositions.get(p.turtle.getType());
@@ -298,6 +298,7 @@ public class Card {
 				} catch (Exception e) {
 					// case where the laser gets out of the board, nothing happens
 					laserOutOfBoard = true;
+					GameSettings.updateLaserGi(orientation,position);
 
 				}
 				break;
@@ -305,10 +306,15 @@ public class Card {
 			}
 			System.out.print(targetPosition[0] + " ");
 			System.out.println(targetPosition[1]);
+			
+			
+			
 			if (!laserOutOfBoard) {
 				try {
 					if (((StoneWall) board[targetPosition[0]][targetPosition[1]]).getType().equals("StoneWall")) {
 						// the laser hits the wall and does nothing
+						
+						GameSettings.updateLaserGi(orientation,position);
 					}
 
 				} catch (Exception e) {
@@ -316,7 +322,12 @@ public class Card {
 					try {
 						if (((IceWall) board[targetPosition[0]][targetPosition[1]]).getType().equals("IceWall")) {
 							// if it's an ice wall it gets destroyed
+							
+							GameSettings.updateLaserGi(orientation,position);
 							board[targetPosition[0]][targetPosition[1]] = "      ";
+							
+							
+							
 						}
 
 					} catch (Exception e2) {
@@ -330,6 +341,8 @@ public class Card {
 									System.out.println("ok4");
 									// switch case depending on the turtle current orientation, as it has to turn
 									// around
+									GameSettings.updateLaserGi(orientation,position);
+									
 									switch (GameSettings.turtlesOrientations.get(turtleType)) {
 									case 'N':
 										GameSettings.turtlesOrientations.put(turtleType, 'S');
@@ -343,6 +356,8 @@ public class Card {
 									case 'W':
 										GameSettings.turtlesOrientations.put(turtleType, 'E');
 										break;
+										
+										
 
 									}
 
@@ -350,6 +365,9 @@ public class Card {
 								// if there are more than two players, we put the turtle back to its starting
 								// position
 								else {
+									
+									GameSettings.updateLaserGi(orientation,position);
+									
 									GameSettings.updateTurtlePosition(turtleType,
 											GameSettings.turtlesStartingPositions.get(turtleType)[0],
 											GameSettings.turtlesStartingPositions.get(turtleType)[1]);
@@ -359,12 +377,17 @@ public class Card {
 													.get(turtleType)[1]] = board[targetPosition[0]][targetPosition[1]];
 
 									board[targetPosition[0]][targetPosition[1]] = "      ";
+									
+									
 								}
 							}
 
 						} catch (Exception e3) {
 							// last possibility : it's a jewel, the laser gets reflected and the turtle goes
 							// back to its starting place
+							
+							GameSettings.updateLaserGi(orientation,position);
+							
 							board[position[0]][position[1]] = "      ";
 
 							GameSettings.updateTurtlePosition(p.getTurtle().getType(),
@@ -375,6 +398,8 @@ public class Card {
 							board[GameSettings.turtlesStartingPositions
 									.get(p.getTurtle().getType())[0]][GameSettings.turtlesStartingPositions
 											.get(p.getTurtle().getType())[1]] = p.getTurtle();
+							
+							
 
 						}
 
@@ -385,30 +410,7 @@ public class Card {
 			p.discardDeck.add(this);
 			instructions.remove();
 			
-			//below that line, instructions for the laser on the GI
-			GameSettings.drawLaser = true;
 			
-			GameSettings.laserOrientation=orientation;
-			GameSettings.laserGIPosition[0] = position[0];
-			GameSettings.laserGIPosition[1] = position[1];
-
-			// below that point, GI informations
-			switch (orientation) {
-			
-			// we have -2 because the laser image is two blocks long
-			case 'N':
-				GameSettings.laserGIPosition[0] = GameSettings.laserGIPosition[0] - 2;
-				break;
-			case 'S':
-				GameSettings.laserGIPosition[0] = GameSettings.laserGIPosition[0] + 1;
-				break;
-			case 'E':
-				GameSettings.laserGIPosition[1] = GameSettings.laserGIPosition[1] + 1;
-				break;
-			case 'W':
-				GameSettings.laserGIPosition[1] = GameSettings.laserGIPosition[1] - 2;
-				break;
-			}
 		}
 	}
 
