@@ -140,41 +140,5 @@ public class GameSettings {
 		board[turtlesStartingPositions.get(t2.getType())[0]][turtlesStartingPositions.get(t2.getType())[1]] = t2;
 	}
 
-	public static void updateLaserGi(char orientation, int[] position) throws InterruptedException {
-
-		// in case there's a laser being shot, we wait 1sec then stop trying to render
-		// it.
-		// it is nevertheless important to have a gif file that only runs once (that's
-		// one parameter of gif files). If not the frame will keep refreshing even
-		// though the gif's removed
-
-		GameSettings.drawLaser = true;
-
-		GameSettings.laserOrientation = orientation;
-		GameSettings.laserGIPosition[0] = position[0];
-		GameSettings.laserGIPosition[1] = position[1];
-
-		switch (orientation) {
-
-		// we have -2 because the laser image is two blocks long
-		case 'N':
-			GameSettings.laserGIPosition[0] = GameSettings.laserGIPosition[0] - 2;
-			break;
-		case 'S':
-			GameSettings.laserGIPosition[0] = GameSettings.laserGIPosition[0] + 1;
-			break;
-		case 'E':
-			GameSettings.laserGIPosition[1] = GameSettings.laserGIPosition[1] + 1;
-			break;
-		case 'W':
-			GameSettings.laserGIPosition[1] = GameSettings.laserGIPosition[1] - 2;
-			break;
-		}
-
-		GBoard.updateGI();
-		Thread.sleep(1000);
-
-		GameSettings.drawLaser = false;
-
-	}
+	
 }

@@ -298,7 +298,7 @@ public class Card {
 				} catch (Exception e) {
 					// case where the laser gets out of the board, nothing happens
 					laserOutOfBoard = true;
-					GameSettings.updateLaserGi(orientation,position);
+					GBoard.updateLaserGi(orientation,position);
 
 				}
 				break;
@@ -314,7 +314,7 @@ public class Card {
 					if (((StoneWall) board[targetPosition[0]][targetPosition[1]]).getType().equals("StoneWall")) {
 						// the laser hits the wall and does nothing
 						
-						GameSettings.updateLaserGi(orientation,position);
+						GBoard.updateLaserGi(orientation,position);
 					}
 
 				} catch (Exception e) {
@@ -323,7 +323,7 @@ public class Card {
 						if (((IceWall) board[targetPosition[0]][targetPosition[1]]).getType().equals("IceWall")) {
 							// if it's an ice wall it gets destroyed
 							
-							GameSettings.updateLaserGi(orientation,position);
+							GBoard.updateLaserGi(orientation,position);
 							board[targetPosition[0]][targetPosition[1]] = "      ";
 							
 							
@@ -341,7 +341,7 @@ public class Card {
 									System.out.println("ok4");
 									// switch case depending on the turtle current orientation, as it has to turn
 									// around
-									GameSettings.updateLaserGi(orientation,position);
+									GBoard.updateLaserGi(orientation,position);
 									
 									switch (GameSettings.turtlesOrientations.get(turtleType)) {
 									case 'N':
@@ -366,7 +366,7 @@ public class Card {
 								// position
 								else {
 									
-									GameSettings.updateLaserGi(orientation,position);
+									GBoard.updateLaserGi(orientation,position);
 									
 									GameSettings.updateTurtlePosition(turtleType,
 											GameSettings.turtlesStartingPositions.get(turtleType)[0],
@@ -386,7 +386,7 @@ public class Card {
 							// last possibility : it's a jewel, the laser gets reflected and the turtle goes
 							// back to its starting place
 							
-							GameSettings.updateLaserGi(orientation,position);
+							GBoard.updateLaserGi(orientation,position);
 							
 							board[position[0]][position[1]] = "      ";
 
