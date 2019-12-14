@@ -1,13 +1,10 @@
 package code;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import ginterface.GEndTurnChoice;
-import ginterface.GCompleteProgram;
 import ginterface.GDiscard;
-import ginterface.GBoard;
 
 public class Player {
 
@@ -15,13 +12,18 @@ public class Player {
 	public ArrayList<Card> deck;
 	public ArrayList<Card> discardDeck;
 	public ArrayList<Card> hand;
+	public String name;
 
-	//public ArrayDeque<Card> program;
 	
 	public Program program;
 	
-	// public static int[] position;
-	// public static char direction;
+	public void setName(String name) {
+		this.name=name;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
 
 	public void setTurtle(TurtleTile playerTurtle) {
 		// on assigne la tortue au joueur

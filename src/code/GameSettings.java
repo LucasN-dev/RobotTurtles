@@ -20,6 +20,8 @@ public class GameSettings {
 	public static HashMap<String, int[]> turtlesStartingPositions;
 
 	public static int playerChoice; // 1 commpleter prog, 2 placer un mur, 3 exectuer prog
+	
+	public static ArrayList<String> PlayersNames;
 
 	public static boolean victory;
 

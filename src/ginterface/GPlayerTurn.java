@@ -18,8 +18,8 @@ public class GPlayerTurn {
 		boolChoice= false;
 		Frame f = new Frame("What do you want to do ?");
 
-		Label labelJoueur = new Label("It's player "+numjoueur + "'s turn.");
-		labelJoueur.setBounds(375, 30, 350, 50);
+		Label labelJoueur = new Label("It's "+j.getName() + "'s turn.");
+		labelJoueur.setBounds(375, 30, 320, 50);
 		Font myFont = new Font("Large", Font.BOLD, 25);
 		labelJoueur.setFont(myFont);
 		f.add(labelJoueur);

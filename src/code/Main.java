@@ -8,6 +8,7 @@ import ginterface.GPlayersNumberButton;
 import ginterface.GCompleteProgram;
 import ginterface.GDiscard;
 import ginterface.GErrorNoMoreCards;
+import ginterface.GPlayersNames;
 import ginterface.GBoard;
 import ginterface.GPlayerTurn;
 
@@ -18,12 +19,16 @@ public class Main {
 
 		// initialisation joueurs
 		GPlayersNumberButton.main(args);
+		
+		
+		GPlayersNames.main(args);
 
 		ArrayList<Player> Joueurs = new ArrayList<Player>();
 
 		for (int i = 0; i < GameSettings.getNumberOfPlayers(); i++) {
 
 			Player j = new Player();
+			j.setName(GameSettings.PlayersNames.get(i));
 			Joueurs.add(j);
 
 		}
