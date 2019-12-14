@@ -42,7 +42,7 @@ public class GPlayersNames {
 		name3 = new JTextField("Player 3");
 		name3.setBounds(50, 180, 200, 30);
 		name4 = new JTextField("Player 4");
-		name4.setBounds(50, 2230, 200, 30);
+		name4.setBounds(50, 230, 200, 30);
 		
 		
 

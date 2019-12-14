@@ -14,7 +14,7 @@ public class GPlayerTurn {
 	public static boolean boolChoice;
 	public HashMap<Integer, JButton> buttons;
 	
-	public GPlayerTurn(int numjoueur, Player j) {
+	public GPlayerTurn( Player j) {
 		boolChoice= false;
 		Frame f = new Frame("What do you want to do ?");
 

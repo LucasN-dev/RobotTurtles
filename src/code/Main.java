@@ -11,6 +11,7 @@ import ginterface.GErrorNoMoreCards;
 import ginterface.GPlayersNames;
 import ginterface.GBoard;
 import ginterface.GPlayerTurn;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
@@ -26,9 +27,14 @@ public class Main {
 		ArrayList<Player> Joueurs = new ArrayList<Player>();
 
 		for (int i = 0; i < GameSettings.getNumberOfPlayers(); i++) {
-
+			
+			//this is where we randomly choose who goes first
+			int randomNum = ThreadLocalRandom.current().nextInt(0, GameSettings.PlayersNames.size());
+			String randomName = GameSettings.PlayersNames.get(randomNum);
+			GameSettings.PlayersNames.remove(randomNum);
+			
 			Player j = new Player();
-			j.setName(GameSettings.PlayersNames.get(i));
+			j.setName(randomName);
 			Joueurs.add(j);
 
 		}
@@ -100,7 +106,7 @@ public class Main {
 
 				Player J = Joueurs.get(i);
 
-				new GPlayerTurn(i + 1, J);
+				new GPlayerTurn(J);
 
 				while (!GPlayerTurn.boolChoice) {
 					Thread.sleep(500);
