@@ -30,14 +30,18 @@ public class Program {
 
 		int size = this.program.size();
 		for (int i = 0; i < size; i++) {
-			this.program.element().runCard(board.getBoard(), p);
+			// we added the check for the program not to be empty, because if someone wins,
+			// his program is emptied inside the for
+			if (!program.isEmpty()) {
+				this.program.element().runCard(board.getBoard(), p);
 
-			Thread.sleep(500);
-			GBoard.updateGI();
-			
-			
+				GameSettings.checkVictory(p, board.getBoard());
+
+				Thread.sleep(500);
+				GBoard.updateGI();
+
+			}
 		}
-
 
 	}
 

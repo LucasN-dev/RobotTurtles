@@ -1,5 +1,8 @@
 package code;
 
+
+import java.util.LinkedHashMap;
+
 public class Board {
 
 	public static Object[][] board;
@@ -12,20 +15,21 @@ public class Board {
 			}
 		}
 		
+		
+		GameSettings.jewelsPositions = new LinkedHashMap<Jewel, int[]>();
+		
 		switch (GameSettings.numberPlayers) {
 		case 2:
 			board[0][1] = GameSettings.turtles.get("BlueTurtle");
-			// GestionJeu.Tortues.remove("BlueTurtle");
 			GameSettings.updateTurtlePosition("BlueTurtle", 0, 1);
 			GameSettings.updateTurtleStartingPosition("BlueTurtle", 0, 1);
 
 			board[0][5] = GameSettings.turtles.get("RedTurtle");
-			// GestionJeu.Tortues.remove("RedTurtle");
 			GameSettings.updateTurtlePosition("RedTurtle", 0, 5);
 			GameSettings.updateTurtleStartingPosition("RedTurtle", 0, 5);
 
 			board[7][3] = GameSettings.jewels.get("GreenJewel");
-			// GestionJeu.Joyaux.remove("GreenJewel");
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("GreenJewel"), new int[]{ 7,3 });
 
 			for (int i = 0; i < 8; i++) {
 				board[i][7] = GameSettings.stoneWalls.get(0);
@@ -34,28 +38,25 @@ public class Board {
 			break;
 		case 3:
 			board[0][0] = GameSettings.turtles.get("BlueTurtle");
-			// GestionJeu.Tortues.remove("BlueTurtle");
 			GameSettings.updateTurtlePosition("BlueTurtle", 0, 0);
 			GameSettings.updateTurtleStartingPosition("BlueTurtle", 0, 0);
 
 			board[0][3] = GameSettings.turtles.get("RedTurtle");
-			// GestionJeu.Tortues.remove("RedTurtle");
 			GameSettings.updateTurtlePosition("RedTurtle", 0, 3);
 			GameSettings.updateTurtleStartingPosition("RedTurtle", 0, 3);
 
 			board[0][5] = GameSettings.turtles.get("GreenTurtle");
-			// GestionJeu.Tortues.remove("GreenTurtle");
 			GameSettings.updateTurtlePosition("GreenTurtle", 0, 5);
 			GameSettings.updateTurtleStartingPosition("GreenTurtle", 0, 5);
 
 			board[7][0] = GameSettings.jewels.get("PurpleJewel");
-			GameSettings.jewels.remove("PurpleJewel");
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("PurpleJewel"), new int[]{ 7,0 });
 
 			board[7][3] = GameSettings.jewels.get("GreenJewel");
-			GameSettings.jewels.remove("GreenJewel");
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("GreenJewel"), new int[]{ 7,3 });
 
 			board[7][5] = GameSettings.jewels.get("BlueJewel");
-			GameSettings.jewels.remove("BlueJewel");
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("BlueJewel"), new int[]{ 7,5 });
 
 			for (int i = 0; i < 8; i++) {
 				board[i][7] = GameSettings.stoneWalls.get(0);
@@ -65,32 +66,30 @@ public class Board {
 			break;
 		case 4:
 			board[0][0] = GameSettings.turtles.get("BlueTurtle");
-			// GestionJeu.Tortues.remove("BlueTurtle");
 			GameSettings.updateTurtlePosition("BlueTurtle", 0, 0);
 			GameSettings.updateTurtleStartingPosition("BlueTurtle", 0, 0);
 
 			board[0][2] = GameSettings.turtles.get("RedTurtle");
-			// GestionJeu.Tortues.remove("RedTurtle");
 			GameSettings.updateTurtlePosition("RedTurtle", 0, 2);
 			GameSettings.updateTurtleStartingPosition("RedTurtle", 0, 2);
 
 			board[0][5] = GameSettings.turtles.get("GreenTurtle");
-			// GestionJeu.Tortues.remove("GreenTurtle");
 			GameSettings.updateTurtlePosition("RedTurtle", 0, 5);
 			GameSettings.updateTurtleStartingPosition("RedTurtle", 0, 5);
 
 			board[0][7] = GameSettings.turtles.get("PurpleTurtle");
-			// GestionJeu.Tortues.remove("PurpleTurtle");
 			GameSettings.updateTurtlePosition("PurpleTurtle", 0, 7);
 			GameSettings.updateTurtleStartingPosition("PurpleTurtle", 0, 7);
 
 			board[7][1] = GameSettings.jewels.get("PurpleJewel");
-			GameSettings.jewels.remove("PurpleJewel");
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("PurpleJewel"), new int[]{ 7,1 });
 
 			board[7][6] = GameSettings.jewels.get("BlueJewel");
-			GameSettings.jewels.remove("BlueJewel");
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("PurpleJewel"), new int[]{ 7,6 });
 
 		}
+		
+		
 	}
 
 	public Object[][] getBoard() {

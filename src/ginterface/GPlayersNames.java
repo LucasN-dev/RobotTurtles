@@ -104,10 +104,10 @@ public class GPlayersNames {
 					Names.add(name3.getText());
 					Names.add(name4.getText());
 					
-					GameSettings.PlayersNames= new ArrayList<String>();
+					GameSettings.playersNames= new ArrayList<String>();
 							
 					for (int i=0; i<GameSettings.numberPlayers; i++) {
-						GameSettings.PlayersNames.add(Names.get(i));
+						GameSettings.playersNames.add(Names.get(i));
 					}
 					f.dispose();
 					PlayersNamesChosen=true;

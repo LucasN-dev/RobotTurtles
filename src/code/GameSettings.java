@@ -1,7 +1,9 @@
 package code;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import ginterface.GBoard;
 
@@ -20,10 +22,14 @@ public class GameSettings {
 	public static HashMap<String, int[]> turtlesStartingPositions;
 
 	public static int playerChoice; // 1 commpleter prog, 2 placer un mur, 3 exectuer prog
-	
-	public static ArrayList<String> PlayersNames;
 
-	public static boolean victory;
+	public static ArrayList<String> playersNames;
+
+	public static LinkedHashMap<Jewel, int[]> jewelsPositions;
+	public static boolean gameEnd;
+	public static String winner;
+
+	public static ArrayList<String> turtlesOutOfTheGame = new ArrayList<String>();
 
 	// *** variables for laser GI ***
 	public static boolean drawLaser = false;
@@ -142,6 +148,36 @@ public class GameSettings {
 		board[turtlesStartingPositions.get(t2.getType())[0]][turtlesStartingPositions.get(t2.getType())[1]] = t2;
 	}
 
-	
-	
+	public static void checkVictory(Player p, Object[][] board) {
+
+		
+		for (int i = 0; i < jewelsPositions.size(); i++) {
+
+
+			// a bit of a filthy code, we want to get the jewelsPositions elements by index
+			// not keys so we use
+			// jewelsPositions.get(jewelsPositions.keySet().toArray()[i])[0] to access them
+
+			if (jewelsPositions.get(jewelsPositions.keySet().toArray()[i])[0] == turtlesPositions
+					.get(p.getTurtle().getType())[0]
+					&& jewelsPositions.get(jewelsPositions.keySet().toArray()[i])[1] == turtlesPositions
+							.get(p.getTurtle().getType())[1]) {
+				winner = p.getName();
+
+				board[turtlesPositions.get(p.getTurtle().getType())[0]][turtlesPositions
+						.get(p.getTurtle().getType())[1]] = jewelsPositions.keySet().toArray()[i];
+				System.out.println("We have a winner");
+
+				// we have to remove all the following cards in the player's program
+				for (int j = 0; j < p.program.getProgram().size(); j++) {
+					p.program.getProgram().remove();
+				}
+
+				// we then have to remove the player from the still playing ones
+				turtlesOutOfTheGame.add(p.getTurtle().getType());
+
+			}
+		}
+	}
+
 }

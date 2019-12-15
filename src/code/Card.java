@@ -260,7 +260,7 @@ public class Card {
 				} catch (Exception e) {
 					// case where the laser gets out of the board, nothing happens
 					laserOutOfBoard = true;
-					GBoard.updateLaserGi(orientation,position);
+					GBoard.updateLaserGi(orientation, position);
 
 				}
 				break;
@@ -273,7 +273,7 @@ public class Card {
 				} catch (Exception e) {
 					// case where the laser gets out of the board, nothing happens
 					laserOutOfBoard = true;
-					GBoard.updateLaserGi(orientation,position);
+					GBoard.updateLaserGi(orientation, position);
 
 				}
 
@@ -288,7 +288,7 @@ public class Card {
 				} catch (Exception e) {
 					// case where the laser gets out of the board, nothing happens
 					laserOutOfBoard = true;
-					GBoard.updateLaserGi(orientation,position);
+					GBoard.updateLaserGi(orientation, position);
 
 				}
 				break;
@@ -301,7 +301,7 @@ public class Card {
 				} catch (Exception e) {
 					// case where the laser gets out of the board, nothing happens
 					laserOutOfBoard = true;
-					GBoard.updateLaserGi(orientation,position);
+					GBoard.updateLaserGi(orientation, position);
 
 				}
 				break;
@@ -309,14 +309,12 @@ public class Card {
 			}
 			System.out.print(targetPosition[0] + " ");
 			System.out.println(targetPosition[1]);
-			
-			
-			
+
 			if (!laserOutOfBoard) {
 				try {
 					if (((StoneWall) board[targetPosition[0]][targetPosition[1]]).getType().equals("StoneWall")) {
 						// the laser hits the wall and does nothing
-						GBoard.updateLaserGi(orientation,position);
+						GBoard.updateLaserGi(orientation, position);
 					}
 
 				} catch (Exception e) {
@@ -324,12 +322,10 @@ public class Card {
 					try {
 						if (((IceWall) board[targetPosition[0]][targetPosition[1]]).getType().equals("IceWall")) {
 							// if it's an ice wall it gets destroyed
-							
-							GBoard.updateLaserGi(orientation,position);
+
+							GBoard.updateLaserGi(orientation, position);
 							board[targetPosition[0]][targetPosition[1]] = "      ";
-							
-							
-							
+
 						}
 
 					} catch (Exception e2) {
@@ -340,11 +336,10 @@ public class Card {
 									|| turtleType.equals("RedTurtle") || turtleType.equals("BlueTurtle")) {
 								// if it's a turtle, it depends on the number o players
 								if (GameSettings.numberPlayers == 2) {
-									System.out.println("ok4");
 									// switch case depending on the turtle current orientation, as it has to turn
 									// around
-									GBoard.updateLaserGi(orientation,position);
-									
+									GBoard.updateLaserGi(orientation, position);
+
 									switch (GameSettings.turtlesOrientations.get(turtleType)) {
 									case 'N':
 										GameSettings.turtlesOrientations.put(turtleType, 'S');
@@ -358,8 +353,6 @@ public class Card {
 									case 'W':
 										GameSettings.turtlesOrientations.put(turtleType, 'E');
 										break;
-										
-										
 
 									}
 
@@ -367,9 +360,9 @@ public class Card {
 								// if there are more than two players, we put the turtle back to its starting
 								// position
 								else {
-									
-									GBoard.updateLaserGi(orientation,position);
-									
+
+									GBoard.updateLaserGi(orientation, position);
+
 									GameSettings.updateTurtlePosition(turtleType,
 											GameSettings.turtlesStartingPositions.get(turtleType)[0],
 											GameSettings.turtlesStartingPositions.get(turtleType)[1]);
@@ -379,29 +372,52 @@ public class Card {
 													.get(turtleType)[1]] = board[targetPosition[0]][targetPosition[1]];
 
 									board[targetPosition[0]][targetPosition[1]] = "      ";
-									
-									
+
 								}
 							}
 
 						} catch (Exception e3) {
 							// last possibility : it's a jewel, the laser gets reflected and the turtle goes
 							// back to its starting place
-							
-							GBoard.updateLaserGi(orientation,position);
-							
-							board[position[0]][position[1]] = "      ";
+							if (GameSettings.numberPlayers == 2) {
+								// switch case depending on the turtle current orientation, as it has to turn
+								// around
+								GBoard.updateLaserGi(orientation, position);
 
-							GameSettings.updateTurtlePosition(p.getTurtle().getType(),
-									GameSettings.turtlesStartingPositions.get(p.getTurtle().getType())[0],
-									GameSettings.turtlesStartingPositions.get(p.getTurtle().getType())[1]);
-							GameSettings.updateTurtleOrientation(p.getTurtle().getType(), 'S');
+								String turtleType = p.getTurtle().getType();
 
-							board[GameSettings.turtlesStartingPositions
-									.get(p.getTurtle().getType())[0]][GameSettings.turtlesStartingPositions
-											.get(p.getTurtle().getType())[1]] = p.getTurtle();
-							
-							
+								switch (GameSettings.turtlesOrientations.get(turtleType)) {
+								case 'N':
+									GameSettings.turtlesOrientations.put(turtleType, 'S');
+									break;
+								case 'S':
+									GameSettings.turtlesOrientations.put(turtleType, 'N');
+									break;
+								case 'E':
+									GameSettings.turtlesOrientations.put(turtleType, 'W');
+									break;
+								case 'W':
+									GameSettings.turtlesOrientations.put(turtleType, 'E');
+									break;
+
+								}
+
+							}
+
+							else {
+								GBoard.updateLaserGi(orientation, position);
+
+								board[position[0]][position[1]] = "      ";
+
+								GameSettings.updateTurtlePosition(p.getTurtle().getType(),
+										GameSettings.turtlesStartingPositions.get(p.getTurtle().getType())[0],
+										GameSettings.turtlesStartingPositions.get(p.getTurtle().getType())[1]);
+								GameSettings.updateTurtleOrientation(p.getTurtle().getType(), 'S');
+
+								board[GameSettings.turtlesStartingPositions
+										.get(p.getTurtle().getType())[0]][GameSettings.turtlesStartingPositions
+												.get(p.getTurtle().getType())[1]] = p.getTurtle();
+							}
 
 						}
 
@@ -411,8 +427,7 @@ public class Card {
 			}
 			p.discardDeck.add(this);
 			instructions.remove();
-			
-			
+
 		}
 	}
 
