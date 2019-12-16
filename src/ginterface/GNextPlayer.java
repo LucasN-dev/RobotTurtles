@@ -25,8 +25,8 @@ public GNextPlayer(Player p) {
 		Font myFont = new Font("Large", Font.BOLD, 25);
 		
 		
-		Label label = new Label("Give the computer to \" + p.getName() ");
-		label.setBounds(20, 40, 600, 50);
+		Label label = new Label("Give the computer to " + p.getName() );
+		label.setBounds(100, 40, 600, 50);
 		label.setFont(myFont);
 		f.add(label);
 		

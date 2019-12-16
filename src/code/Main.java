@@ -8,6 +8,7 @@ import ginterface.GPlayersNumberButton;
 import ginterface.GCompleteProgram;
 import ginterface.GDiscard;
 import ginterface.GErrorNoMoreCards;
+import ginterface.GNextPlayer;
 import ginterface.GPlayersNames;
 import ginterface.GBoard;
 import ginterface.GPlayerTurn;
@@ -111,7 +112,15 @@ public class Main {
 					GameSettings.gameEnd=true;
 					// TODO: victory GI + ranking
 				}
-
+				
+				new GNextPlayer(p);
+				
+				while (!GNextPlayer.closed) {
+					Thread.sleep(500);
+					// petite astuce pas tres opti pour attendre que la fenetre se ferme ( et donc
+					// que le nombre de joueurs soit choisi pour passer a la suite)
+				}
+				
 				if (!GameSettings.turtlesOutOfTheGame.contains(p.getTurtle().getType()) && !GameSettings.gameEnd) {
 					new GPlayerTurn(p);
 
@@ -128,8 +137,8 @@ public class Main {
 					switch (GameSettings.playerChoice) {
 
 					case 1:
-						GCompleteProgram.completed = false; // si on met pas ça on rentre jamais dans la boucle après la
-															// première iteration
+						GCompleteProgram.completed = false; // si on met pas ï¿½a on rentre jamais dans la boucle aprï¿½s la
+															// premiï¿½re iteration
 						while (!GCompleteProgram.completed) {
 
 							p.program.completeProgram(p);
@@ -173,7 +182,7 @@ public class Main {
 
 					if (p.deck.size() < (5 - p.hand.size())) {
 						// on transfere la pile de discard vers la pioche s'il reste moins
-						// de carte dans la pioche que de carte à piocher
+						// de carte dans la pioche que de carte ï¿½ piocher
 						p.discardDeckToDeck();
 						System.out.println("Transfert de cartes");
 					}
@@ -195,9 +204,7 @@ public class Main {
 					System.out.println("Pioche " + p.deck.size());
 					System.out.println("Discard " + p.discardDeck.size());
 					
-					if (!GameSettings.gameEnd) {
-						
-					}
+					
 
 				}
 			}
