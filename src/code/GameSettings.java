@@ -9,7 +9,7 @@ import ginterface.GBoard;
 
 public class GameSettings {
 
-	public static boolean gameWon = false; // TODO methode qui verifie si quelqu'un a gagne
+	public static boolean gameWon = false;
 	public static int numberPlayers;
 	public static HashMap<String, TurtleTile> turtles;
 	public static HashMap<String, Jewel> jewels;

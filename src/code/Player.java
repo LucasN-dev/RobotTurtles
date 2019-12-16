@@ -129,8 +129,7 @@ public class Player {
 		}
 	}
 
-	// programme
-	
+
 	
 
 	public void setProgram(Program program) {
