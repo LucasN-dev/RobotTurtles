@@ -20,7 +20,7 @@ public GNextPlayer(Player p) {
 		
 		closed=false;
 		
-		Frame f = new Frame("End of the turn ");
+		Frame f = new Frame("End of the turn");
 
 		Font myFont = new Font("Large", Font.BOLD, 25);
 		
