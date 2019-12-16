@@ -194,6 +194,10 @@ public class Main {
 					System.out.println("Main " + p.hand.size());
 					System.out.println("Pioche " + p.deck.size());
 					System.out.println("Discard " + p.discardDeck.size());
+					
+					if (!GameSettings.gameEnd) {
+						
+					}
 
 				}
 			}
