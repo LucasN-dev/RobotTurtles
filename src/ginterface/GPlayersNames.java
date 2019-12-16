@@ -8,6 +8,8 @@ import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -43,8 +45,6 @@ public class GPlayersNames {
 		name3.setBounds(50, 180, 200, 30);
 		name4 = new JTextField("Player 4");
 		name4.setBounds(50, 230, 200, 30);
-		
-		
 
 		int height = 305;
 
@@ -103,15 +103,22 @@ public class GPlayersNames {
 					Names.add(name2.getText());
 					Names.add(name3.getText());
 					Names.add(name4.getText());
-					
-					GameSettings.playersNames= new ArrayList<String>();
-							
-					for (int i=0; i<GameSettings.numberPlayers; i++) {
+
+					GameSettings.playersNames = new ArrayList<String>();
+
+					for (int i = 0; i < GameSettings.numberPlayers; i++) {
 						GameSettings.playersNames.add(Names.get(i));
 					}
 					f.dispose();
-					PlayersNamesChosen=true;
+					PlayersNamesChosen = true;
 				}
+			}
+		});
+
+		// to close an AWT window when the close button is pressed
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				f.dispose(); // use dispose method
 			}
 		});
 

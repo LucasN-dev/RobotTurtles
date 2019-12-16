@@ -80,6 +80,8 @@ public class GBoard extends Canvas {
 							// only onceto avoid other bugs
 		}
 
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 	}
 
 	public static void updateGI() {
@@ -96,8 +98,7 @@ public class GBoard extends Canvas {
 		f.setSize(917, 949);
 		f.setVisible(true);
 	}
-	
-	
+
 	public static void updateLaserGi(char orientation, int[] position) throws InterruptedException {
 
 		// in case there's a laser being shot, we wait 1sec then stop trying to render

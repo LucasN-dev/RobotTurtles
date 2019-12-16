@@ -30,8 +30,6 @@ public class GPlayersNumberButton {
 		f.add(checkBox2);
 		f.add(checkBox3);
 
-		
-
 		f.add(label);
 
 		Button b = new Button("Confirm");
@@ -74,6 +72,13 @@ public class GPlayersNumberButton {
 					PlayersNumberChosen = true;
 					f.dispose();
 				}
+			}
+		});
+
+		// to close an AWT window when the close button is pressed
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				f.dispose(); // use dispose method
 			}
 		});
 
