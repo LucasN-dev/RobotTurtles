@@ -80,7 +80,7 @@ public class Card {
 								|| ((TurtleTile) board[position[0]][position[1] + 1]).getType().equals("RedTurtle")
 								|| ((TurtleTile) board[position[0]][position[1] + 1]).getType().equals("BlueTurtle")) {
 
-							// we put both turtles back at their starting positions
+							// we put  both turtles back at their starting positions
 							GameSettings.turtleCollisionBackToStart(p.turtle,
 									(TurtleTile) board[position[0]][position[1] + 1], board);
 							board[positionSave[0]][positionSave[1]] = "      ";
