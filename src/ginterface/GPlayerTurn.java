@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 import code.GameSettings;
 import code.Player;
@@ -47,10 +48,8 @@ public class GPlayerTurn {
 		b3.setBounds(706, 480, 170, 50);
 		f.add(b3);
 
-		JButton bTortue = new JButton(new ImageIcon("src/images/" + j.getTurtle().getType() + "/S.png"));
+		JLabel bTortue = new JLabel(new ImageIcon("src/images/" + j.getTurtle().getType() + "/S.png"));
 		bTortue.setBounds(890, 40, 98, 98);
-		bTortue.setRolloverEnabled(false);
-		bTortue.setBorderPainted(false);
 		f.add(bTortue);
 
 		buttons = new HashMap<Integer, JButton>();

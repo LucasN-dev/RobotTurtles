@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 import code.Card;
 import code.GameSettings;
@@ -28,12 +29,12 @@ public class GEndTurnChoice {
 		label.setFont(myFont);
 		f.add(label);
 
-		cardsButtons = new HashMap<Integer, JButton>();
+		
 		for (int i = 0; i < Main.size(); i++) {
 
-			JButton b = new JButton(new ImageIcon("src/images/" + Main.get(i).getType() + ".png"));
+			JLabel b = new JLabel(new ImageIcon("src/images/" + Main.get(i).getType() + ".png"));
 			b.setBounds(50 + 182 * i, 140, 162, 219);
-			cardsButtons.put(i, b);
+			
 
 			f.add(b);
 		}

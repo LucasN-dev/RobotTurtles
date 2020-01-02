@@ -24,7 +24,7 @@ public class Main {
 
 		GPlayersNames.main(args);
 
-		ArrayList<Player> players = new ArrayList<Player>();
+		GameSettings.players = new ArrayList<Player>();
 
 		for (int i = 0; i < GameSettings.getNumberOfPlayers(); i++) {
 
@@ -35,7 +35,7 @@ public class Main {
 
 			Player p = new Player();
 			p.setName(randomName);
-			players.add(p);
+			GameSettings.players.add(p);
 
 		}
 
@@ -60,29 +60,29 @@ public class Main {
 
 		switch (GameSettings.numberPlayers) {
 		case 2:
-			players.get(0).setTurtle(GameSettings.turtles.get("BlueTurtle"));
-			players.get(1).setTurtle(GameSettings.turtles.get("RedTurtle"));
+			GameSettings.players.get(0).setTurtle(GameSettings.turtles.get("BlueTurtle"));
+			GameSettings.players.get(1).setTurtle(GameSettings.turtles.get("RedTurtle"));
 			break;
 
 		case 3:
-			players.get(0).setTurtle(GameSettings.turtles.get("RedTurtle"));
-			players.get(1).setTurtle(GameSettings.turtles.get("BlueTurtle"));
-			players.get(2).setTurtle(GameSettings.turtles.get("GreenTurtle"));
+			GameSettings.players.get(0).setTurtle(GameSettings.turtles.get("RedTurtle"));
+			GameSettings.players.get(1).setTurtle(GameSettings.turtles.get("BlueTurtle"));
+			GameSettings.players.get(2).setTurtle(GameSettings.turtles.get("GreenTurtle"));
 
 			break;
 
 		case 4:
-			players.get(0).setTurtle(GameSettings.turtles.get("RedTurtle"));
-			players.get(1).setTurtle(GameSettings.turtles.get("BlueTurtle"));
-			players.get(2).setTurtle(GameSettings.turtles.get("GreenTurtle"));
-			players.get(3).setTurtle(GameSettings.turtles.get("PurpleTurtle"));
+			GameSettings.players.get(0).setTurtle(GameSettings.turtles.get("RedTurtle"));
+			GameSettings.players.get(1).setTurtle(GameSettings.turtles.get("BlueTurtle"));
+			GameSettings.players.get(2).setTurtle(GameSettings.turtles.get("GreenTurtle"));
+			GameSettings.players.get(3).setTurtle(GameSettings.turtles.get("PurpleTurtle"));
 
 			break;
 
 		}
 
 		for (int i = 0; i < GameSettings.numberPlayers; i++) {
-			Player p = players.get(i);
+			Player p = GameSettings.players.get(i);
 
 			p.setDeck();
 			p.mixDeck();
@@ -100,28 +100,30 @@ public class Main {
 
 		while (!GameSettings.gameEnd) {
 
-			for (int i = 0; i < players.size(); i++) {
+			for (int i = 0; i < GameSettings.players.size(); i++) {
 
-				System.out.println("C'est au joueur " + (i + 1) + " de jouer");
-
-				Player p = players.get(i);
 				
 				//if there's only one player left playing, the game ends.
 				
-				if (GameSettings.numberPlayers-GameSettings.turtlesOutOfTheGame.size() == 1) {
+				if (GameSettings.players.size() == 1) {
 					GameSettings.gameEnd=true;
 					// TODO: victory GI + ranking
 				}
 				
-				new GNextPlayer(p);
+
+				Player p = GameSettings.players.get(i);
 				
-				while (!GNextPlayer.closed) {
-					Thread.sleep(500);
-					// petite astuce pas tres opti pour attendre que la fenetre se ferme ( et donc
-					// que le nombre de joueurs soit choisi pour passer a la suite)
-				}
-				
-				if (!GameSettings.turtlesOutOfTheGame.contains(p.getTurtle().getType()) && !GameSettings.gameEnd) {
+				if (!GameSettings.gameEnd) {
+					
+					new GNextPlayer(p);
+					
+					while (!GNextPlayer.closed) {
+						Thread.sleep(500);
+						// petite astuce pas tres opti pour attendre que la fenetre se ferme ( et donc
+						// que le nombre de joueurs soit choisi pour passer a la suite)
+					}
+					
+					
 					new GPlayerTurn(p);
 
 					while (!GPlayerTurn.boolChoice) {
@@ -157,8 +159,12 @@ public class Main {
 
 					// pour test
 					board.printBoard();
-
-					if (p.hand.size() != 0) {
+					
+					//if the player is in ranking this means he just reached a jewel, no need to ask him
+					//what to do with his cards
+					//if there are no more cards to draw, same.
+					
+					if (p.hand.size() != 0 && !GameSettings.ranking.contains(p)) {
 						p.endTurnChoice();
 					} else {
 						GameSettings.playerChoice = 2;
@@ -209,6 +215,10 @@ public class Main {
 				}
 			}
 		}
+		
+		
+		
+		
 
 	}
 

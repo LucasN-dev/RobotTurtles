@@ -11,6 +11,9 @@ public class GameSettings {
 
 	public static boolean gameWon = false;
 	public static int numberPlayers;
+	
+	public static ArrayList<Player> players;
+	
 	public static HashMap<String, TurtleTile> turtles;
 	public static HashMap<String, Jewel> jewels;
 	public static ArrayList<StoneWall> stoneWalls;
@@ -29,7 +32,8 @@ public class GameSettings {
 	public static boolean gameEnd;
 	public static String winner;
 
-	public static ArrayList<String> turtlesOutOfTheGame = new ArrayList<String>();
+	
+	public static ArrayList<Player> ranking = new ArrayList<Player>();
 
 	// *** variables for laser GI ***
 	public static boolean drawLaser = false;
@@ -173,8 +177,13 @@ public class GameSettings {
 					p.program.getProgram().remove();
 				}
 
-				// we then have to remove the player from the still playing ones
-				turtlesOutOfTheGame.add(p.getTurtle().getType());
+				
+				
+				// we add the player to the ranking 
+				ranking.add(p);
+				
+				//we remove the player from the playing players pool
+				players.remove(p);
 
 			}
 		}
