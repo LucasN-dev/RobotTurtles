@@ -16,11 +16,11 @@ public class GPlayerTurn {
 	public static boolean boolChoice;
 	public HashMap<Integer, JButton> buttons;
 
-	public GPlayerTurn(Player j) {
+	public GPlayerTurn(Player p) {
 		boolChoice = false;
 		Frame f = new Frame("What do you want to do ?");
 
-		Label labelJoueur = new Label("It's " + j.getName() + "'s turn.");
+		Label labelJoueur = new Label("It's " + p.getName() + "'s turn.");
 		labelJoueur.setBounds(375, 30, 320, 50);
 		Font myFont = new Font("Large", Font.BOLD, 25);
 		labelJoueur.setFont(myFont);
@@ -32,7 +32,7 @@ public class GPlayerTurn {
 		f.add(label1);
 
 		Label VotreJeu = new Label("Your hand:");
-		VotreJeu.setBounds(50, 170, 200, 40);
+		VotreJeu.setBounds(50, 170, 200, 25);
 		VotreJeu.setFont(myFont);
 		f.add(VotreJeu);
 
@@ -48,14 +48,36 @@ public class GPlayerTurn {
 		b3.setBounds(706, 480, 170, 50);
 		f.add(b3);
 
-		JLabel bTortue = new JLabel(new ImageIcon("src/images/" + j.getTurtle().getType() + "/S.png"));
+		JLabel bTortue = new JLabel(new ImageIcon("src/images/" + p.getTurtle().getType() + "/S.png"));
 		bTortue.setBounds(890, 40, 98, 98);
 		f.add(bTortue);
+		
+		Font myFont2 = new Font("LessLarge", Font.BOLD, 18);
+		
+		Label stoneNumber = new Label("x" + p.stoneWalls.size());
+		stoneNumber.setBounds(25,140, 40, 15);
+		stoneNumber.setFont(myFont2);
+		f.add(stoneNumber);
+		
+		Label iceNumber = new Label("x" + p.iceWalls.size());
+		iceNumber.setBounds(125,140, 40, 15);
+		iceNumber.setFont(myFont2);
+		f.add(iceNumber);
+		
+		
+		JLabel sWalls = new JLabel(new ImageIcon("src/images/StoneWall.png"));
+		sWalls.setBounds(10, 40, 98, 98);
+		f.add(sWalls);
+		
+		JLabel iWalls = new JLabel(new ImageIcon("src/images/IceWall.png"));
+		iWalls.setBounds(110, 40, 98, 98);
+		f.add(iWalls);
+		
 
 		buttons = new HashMap<Integer, JButton>();
-		for (int i = 0; i < j.hand.size(); i++) {
+		for (int i = 0; i < p.hand.size(); i++) {
 
-			JButton b = new JButton(new ImageIcon("src/images/" + j.hand.get(i).getType() + ".png"));
+			JButton b = new JButton(new ImageIcon("src/images/" + p.hand.get(i).getType() + ".png"));
 			b.setBounds(50 + 182 * i, 220, 162, 219);
 			b.setRolloverEnabled(false);
 			b.setBorderPainted(false);

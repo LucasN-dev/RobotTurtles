@@ -89,6 +89,7 @@ public class Main {
 			p.mixDeck();
 			p.setDiscardDeck();
 			p.setHand();
+			p.setWalls();
 			Program program = new Program();
 			p.setProgram(program);
 

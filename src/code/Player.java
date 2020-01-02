@@ -13,6 +13,8 @@ public class Player {
 	public ArrayList<Card> discardDeck;
 	public ArrayList<Card> hand;
 	public String name;
+	public ArrayList<StoneWall> stoneWalls;
+	public ArrayList<IceWall> iceWalls;
 
 	
 	public Program program;
@@ -23,6 +25,21 @@ public class Player {
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public void setWalls() {
+		stoneWalls = new ArrayList<StoneWall>();
+		iceWalls = new ArrayList<IceWall>();
+		
+		for (int i=0; i<3; i++) {
+			StoneWall stoneWall = new StoneWall();
+			this.stoneWalls.add(stoneWall);
+		}
+		
+		for (int i=0; i<2; i++) {
+			IceWall iceWall = new IceWall();
+			this.iceWalls.add(iceWall);
+		}
 	}
 
 	public void setTurtle(TurtleTile playerTurtle) {
