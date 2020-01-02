@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import ginterface.GEndTurnChoice;
+import ginterface.GBuildWall;
 import ginterface.GDiscard;
 
 public class Player {
@@ -153,7 +154,14 @@ public class Player {
 		this.program = program;
 	}
 
-	
+	public void buildWall() throws InterruptedException {
+		new GBuildWall(this);
+		
+		while (!GBuildWall.done) {
+			Thread.sleep(300);
+		}
+		
+	}
 	public void endTurnChoice() throws InterruptedException {
 		new GEndTurnChoice(this.hand);
 

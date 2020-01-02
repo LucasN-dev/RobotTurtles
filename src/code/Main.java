@@ -161,7 +161,8 @@ public class Main {
 						break;
 
 					case 2:
-						// TODO fonction placer un mur
+						p.buildWall();
+						GBoard.updateGI();
 						break;
 
 					case 3:

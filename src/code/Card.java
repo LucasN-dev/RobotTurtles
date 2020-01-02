@@ -50,20 +50,31 @@ public class Card {
 
 					} catch (Exception ex) {
 
-						// case where the turtle is about to hit a wall
+						// case where the turtle is about to hit a stone wall
 						try {
-							if (((StoneWall) board[position[0] - 1][position[1]]).getType().equals("StoneWall")
-									|| ((IceWall) board[position[0] - 1][position[1]]).getType().equals("IceWall")) {
+							if (((StoneWall) board[position[0] - 1][position[1]]).getType().equals("StoneWall")) {
 								// the turtle doesn't move but turns around
 								orientation = 'S';
 								GameSettings.updateTurtleOrientation(p.turtle.getType(), orientation);
 							}
 
 						} catch (Exception e) {
-							// case where there's no turtle and no wall
-							position[0] = position[0] - 1;
-							board[positionSave[0]][positionSave[1]] = "      ";
-							board[position[0]][position[1]] = p.turtle;
+
+							// if it's not a stone wall we check for ice walls
+							// case where the turtle is about to hit an ice wall
+							try {
+								if (((IceWall) board[position[0] - 1][position[1]]).getType().equals("IceWall")) {
+									// the turtle doesn't move but turns around
+									orientation = 'S';
+									GameSettings.updateTurtleOrientation(p.turtle.getType(), orientation);
+								}
+							} catch (Exception e2) {
+								// case where there's no turtle and no wall
+								position[0] = position[0] - 1;
+								board[positionSave[0]][positionSave[1]] = "      ";
+								board[position[0]][position[1]] = p.turtle;
+							}
+
 						}
 					}
 
@@ -80,7 +91,7 @@ public class Card {
 								|| ((TurtleTile) board[position[0]][position[1] + 1]).getType().equals("RedTurtle")
 								|| ((TurtleTile) board[position[0]][position[1] + 1]).getType().equals("BlueTurtle")) {
 
-							// we put  both turtles back at their starting positions
+							// we put both turtles back at their starting positions
 							GameSettings.turtleCollisionBackToStart(p.turtle,
 									(TurtleTile) board[position[0]][position[1] + 1], board);
 							board[positionSave[0]][positionSave[1]] = "      ";
@@ -90,30 +101,43 @@ public class Card {
 						}
 
 					} catch (Exception ex) {
+
+						// case where the turtle is about to hit a stone wall
 						try {
-							if (((StoneWall) board[position[0]][position[1] + 1]).getType().equals("StoneWall")
-									|| ((IceWall) board[position[0]][position[1] + 1]).getType().equals("IceWall")) {
+							if (((StoneWall) board[position[0]][position[1] + 1]).getType().equals("StoneWall")) {
 								// the turtle doesn't move but turns around
 								orientation = 'W';
 								GameSettings.updateTurtleOrientation(p.turtle.getType(), orientation);
 							}
 
 						} catch (Exception e) {
-							position[1] = position[1] + 1;
-							board[positionSave[0]][positionSave[1]] = "      ";
-							board[position[0]][position[1]] = p.turtle;
-						}
 
-						System.out.println("yes");
-						p.discardDeck.add(this);
-						instructions.remove();
+							// if it's not a stone wall we check for ice walls
+							// case where the turtle is about to hit an ice wall
+							try {
+								if (((IceWall) board[position[0]][position[1] + 1]).getType().equals("IceWall")) {
+									// the turtle doesn't move but turns around
+									orientation = 'W';
+									GameSettings.updateTurtleOrientation(p.turtle.getType(), orientation);
+								}
+							} catch (Exception e2) {
+								position[1] = position[1] + 1;
+								board[positionSave[0]][positionSave[1]] = "      ";
+								board[position[0]][position[1]] = p.turtle;
+							}
+						}
 					}
+					System.out.println("yes");
+					p.discardDeck.add(this);
+					instructions.remove();
 				}
 
 				else if (orientation == 'S') {
-
+					
+					System.out.println("un");
+					
 					try {
-						if (((TurtleTile) board[position[0]][position[1] + 1]).getType().equals("PurpleTurtle")
+						if (((TurtleTile) board[position[0] + 1][position[1]]).getType().equals("PurpleTurtle")
 								|| ((TurtleTile) board[position[0] + 1][position[1]]).getType().equals("GreenTurtle")
 								|| ((TurtleTile) board[position[0] + 1][position[1]]).getType().equals("RedTurtle")
 								|| ((TurtleTile) board[position[0] + 1][position[1]]).getType().equals("BlueTurtle")) {
@@ -128,21 +152,35 @@ public class Card {
 						}
 
 					} catch (Exception ex) {
+						System.out.println("deux");
+						// case where the turtle is about to hit a stone wall
 						try {
-							if (((StoneWall) board[position[0] + 1][position[1]]).getType().equals("StoneWall")
-									|| ((IceWall) board[position[0] + 1][position[1]]).getType().equals("IceWall")) {
+							if (((StoneWall) board[position[0] + 1][position[1]]).getType().equals("StoneWall")) {
+								System.out.println("PIERRE");
 								// the turtle doesn't move but turns around
 								orientation = 'N';
 								GameSettings.updateTurtleOrientation(p.turtle.getType(), orientation);
 							}
 
 						} catch (Exception e) {
-							position[0] = position[0] + 1;
-							board[positionSave[0]][positionSave[1]] = "      ";
-							board[position[0]][position[1]] = p.turtle;
+							System.out.println("trois");
+							// if it's not a stone wall we check for ice walls
+							// case where the turtle is about to hit an ice wall
+							try {
+								if (((IceWall) board[position[0] + 1][position[1]]).getType().equals("IceWall")) {
+									System.out.println("quatre");
+									// the turtle doesn't move but turns around
+									orientation = 'N';
+									GameSettings.updateTurtleOrientation(p.turtle.getType(), orientation);
+								}
+							} catch (Exception e2) {
+								System.out.println("what");
+								position[0] = position[0] + 1;
+								board[positionSave[0]][positionSave[1]] = "      ";
+								board[position[0]][position[1]] = p.turtle;
+							}
 						}
 					}
-
 					System.out.println("yes");
 					p.discardDeck.add(this);
 					instructions.remove();
@@ -166,21 +204,32 @@ public class Card {
 						}
 
 					} catch (Exception ex) {
+
+						// case where the turtle is about to hit a stone wall
 						try {
-							if (((StoneWall) board[position[0]][position[1] - 1]).getType().equals("StoneWall")
-									|| ((IceWall) board[position[0]][position[1] - 1]).getType().equals("IceWall")) {
+							if (((StoneWall) board[position[0]][position[1] - 1]).getType().equals("StoneWall")) {
 								// the turtle doesn't move but turns around
 								orientation = 'E';
 								GameSettings.updateTurtleOrientation(p.turtle.getType(), orientation);
 							}
 
 						} catch (Exception e) {
-							position[1] = position[1] - 1;
-							board[positionSave[0]][positionSave[1]] = "      ";
-							board[position[0]][position[1]] = p.turtle;
+
+							// if it's not a stone wall we check for ice walls
+							// case where the turtle is about to hit an ice wall
+							try {
+								if (((IceWall) board[position[0]][position[1] - 1]).getType().equals("IceWall")) {
+									// the turtle doesn't move but turns around
+									orientation = 'E';
+									GameSettings.updateTurtleOrientation(p.turtle.getType(), orientation);
+								}
+							} catch (Exception e2) {
+								position[1] = position[1] - 1;
+								board[positionSave[0]][positionSave[1]] = "      ";
+								board[position[0]][position[1]] = p.turtle;
+							}
 						}
 					}
-
 					System.out.println("yes");
 					p.discardDeck.add(this);
 					instructions.remove();
@@ -191,8 +240,8 @@ public class Card {
 				GBoard.updateGI();
 
 			} catch (Exception e) {
-				// le cas ou on essaye de sortir du plateau, on renvoi la tortue à la case
-				// départ
+				// le cas ou on essaye de sortir du plateau, on renvoi la tortue ï¿½ la case
+				// dï¿½part
 				position[0] = GameSettings.turtlesStartingPositions.get(p.turtle.getType())[0];
 				position[1] = GameSettings.turtlesStartingPositions.get(p.turtle.getType())[1];
 				board[position[0]][position[1]] = p.turtle;

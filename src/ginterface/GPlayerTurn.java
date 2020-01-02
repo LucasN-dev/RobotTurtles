@@ -40,9 +40,20 @@ public class GPlayerTurn {
 		b1.setBounds(122, 480, 170, 50);
 		f.add(b1);
 
-		Button b2 = new Button("Build a wall");
-		b2.setBounds(414, 480, 170, 50);
-		f.add(b2);
+		if (!p.stoneWalls.isEmpty() || !p.iceWalls.isEmpty()) {
+			Button b2 = new Button("Build a wall");
+			b2.setBounds(414, 480, 170, 50);
+			f.add(b2);
+			
+			b2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					f.dispose();
+					GameSettings.playerChoice = 2;
+					boolChoice = true;
+				}
+			});
+			
+		}
 
 		Button b3 = new Button("Run my program");
 		b3.setBounds(706, 480, 170, 50);
@@ -51,28 +62,26 @@ public class GPlayerTurn {
 		JLabel bTortue = new JLabel(new ImageIcon("src/images/" + p.getTurtle().getType() + "/S.png"));
 		bTortue.setBounds(890, 40, 98, 98);
 		f.add(bTortue);
-		
+
 		Font myFont2 = new Font("LessLarge", Font.BOLD, 18);
-		
+
 		Label stoneNumber = new Label("x" + p.stoneWalls.size());
-		stoneNumber.setBounds(25,140, 40, 15);
+		stoneNumber.setBounds(25, 140, 40, 15);
 		stoneNumber.setFont(myFont2);
 		f.add(stoneNumber);
-		
+
 		Label iceNumber = new Label("x" + p.iceWalls.size());
-		iceNumber.setBounds(125,140, 40, 15);
+		iceNumber.setBounds(125, 140, 40, 15);
 		iceNumber.setFont(myFont2);
 		f.add(iceNumber);
-		
-		
+
 		JLabel sWalls = new JLabel(new ImageIcon("src/images/StoneWall.png"));
 		sWalls.setBounds(10, 40, 98, 98);
 		f.add(sWalls);
-		
+
 		JLabel iWalls = new JLabel(new ImageIcon("src/images/IceWall.png"));
 		iWalls.setBounds(110, 40, 98, 98);
 		f.add(iWalls);
-		
 
 		buttons = new HashMap<Integer, JButton>();
 		for (int i = 0; i < p.hand.size(); i++) {
@@ -104,13 +113,7 @@ public class GPlayerTurn {
 			}
 		});
 
-		b2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				f.dispose();
-				GameSettings.playerChoice = 2;
-				boolChoice = true;
-			}
-		});
+		
 
 		b3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

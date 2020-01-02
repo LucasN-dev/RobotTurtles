@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import code.GameSettings;
+import code.IceWall;
 import code.Jewel;
 import code.StoneWall;
 import code.Board;
@@ -14,7 +15,7 @@ import code.TurtleTile;
 
 public class GBoard extends Canvas {
 
-	public int[] giPosistions = { 45, 146, 247, 349, 450, 551, 653, 754, };
+	public static int[] giPosistions = { 45, 146, 247, 349, 450, 551, 653, 754, };
 	public static JFrame f = new JFrame("Robot Turtles Java Edition");
 	public static GBoard m = new GBoard();
 
@@ -44,6 +45,11 @@ public class GBoard extends Canvas {
 
 				else if (board[i][j].getClass() == StoneWall.class) {
 					Image im = t.getImage("src/images/StoneWall.png");
+					g.drawImage(im, giPosistions[j], giPosistions[i], this);
+				}
+				
+				else if (board[i][j].getClass() == IceWall.class) {
+					Image im = t.getImage("src/images/IceWall.png");
 					g.drawImage(im, giPosistions[j], giPosistions[i], this);
 				}
 
