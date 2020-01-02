@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import ginterface.GPlayersNumberButton;
+import ginterface.GRanking;
 import ginterface.GCompleteProgram;
 import ginterface.GDiscard;
 import ginterface.GErrorNoMoreCards;
@@ -102,28 +103,39 @@ public class Main {
 
 			for (int i = 0; i < GameSettings.players.size(); i++) {
 
-				
-				//if there's only one player left playing, the game ends.
-				
-				if (GameSettings.players.size() == 1) {
-					GameSettings.gameEnd=true;
+				Player p = GameSettings.players.get(i);
+
+				// if there's only one player left playing, the game ends.
+				if (GameSettings.players.size() - GameSettings.playersOutOfTheGame.size() == 1) {
+					GameSettings.gameEnd = true;
+
+					// we need to add the last player at the bottom of the ranking but it is not
+					// necessarily the next player in the "players" ArrayList because we don't
+					// remove the players who reached a jewel from this list to avoid bugs. So we
+					// check which player is in "players" but not in "ranking" and we add him at the
+					// end
+					
+					for (int j = 0; j < GameSettings.players.size(); j++) {
+						Player plast = GameSettings.players.get(j);
+						if (!GameSettings.ranking.contains(plast)) {
+							GameSettings.ranking.add(plast);
+						}
+
+					}
+					GRanking.main(args);
 					// TODO: victory GI + ranking
 				}
-				
 
-				Player p = GameSettings.players.get(i);
-				
-				if (!GameSettings.gameEnd) {
-					
+				if (!GameSettings.gameEnd && !GameSettings.playersOutOfTheGame.contains(p)) {
+
 					new GNextPlayer(p);
-					
+
 					while (!GNextPlayer.closed) {
 						Thread.sleep(500);
 						// petite astuce pas tres opti pour attendre que la fenetre se ferme ( et donc
 						// que le nombre de joueurs soit choisi pour passer a la suite)
 					}
-					
-					
+
 					new GPlayerTurn(p);
 
 					while (!GPlayerTurn.boolChoice) {
@@ -159,11 +171,12 @@ public class Main {
 
 					// pour test
 					board.printBoard();
-					
-					//if the player is in ranking this means he just reached a jewel, no need to ask him
-					//what to do with his cards
-					//if there are no more cards to draw, same.
-					
+
+					// if the player is in ranking this means he just reached a jewel, no need to
+					// ask him
+					// what to do with his cards
+					// if there are no more cards to draw, same.
+
 					if (p.hand.size() != 0 && !GameSettings.ranking.contains(p)) {
 						p.endTurnChoice();
 					} else {
@@ -209,16 +222,10 @@ public class Main {
 					System.out.println("Main " + p.hand.size());
 					System.out.println("Pioche " + p.deck.size());
 					System.out.println("Discard " + p.discardDeck.size());
-					
-					
 
 				}
 			}
 		}
-		
-		
-		
-		
 
 	}
 

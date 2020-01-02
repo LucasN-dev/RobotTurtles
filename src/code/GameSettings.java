@@ -11,9 +11,9 @@ public class GameSettings {
 
 	public static boolean gameWon = false;
 	public static int numberPlayers;
-	
+
 	public static ArrayList<Player> players;
-	
+
 	public static HashMap<String, TurtleTile> turtles;
 	public static HashMap<String, Jewel> jewels;
 	public static ArrayList<StoneWall> stoneWalls;
@@ -32,8 +32,8 @@ public class GameSettings {
 	public static boolean gameEnd;
 	public static String winner;
 
-	
 	public static ArrayList<Player> ranking = new ArrayList<Player>();
+	public static ArrayList<Player> playersOutOfTheGame = new ArrayList<Player>();
 
 	// *** variables for laser GI ***
 	public static boolean drawLaser = false;
@@ -154,9 +154,7 @@ public class GameSettings {
 
 	public static void checkVictory(Player p, Object[][] board) {
 
-		
 		for (int i = 0; i < jewelsPositions.size(); i++) {
-
 
 			// a bit of a filthy code, we want to get the jewelsPositions elements by index
 			// not keys so we use
@@ -173,17 +171,18 @@ public class GameSettings {
 				System.out.println("We have a winner");
 
 				// we have to remove all the following cards in the player's program
-				for (int j = 0; j < p.program.getProgram().size(); j++) {
-					p.program.getProgram().remove();
-				}
+				
+				p.program.getProgram().clear();
+				
 
-				
-				
-				// we add the player to the ranking 
+				// we add the player to the ranking
 				ranking.add(p);
+
+				// At first we removed the player from the playing pool but it could create bugs
+				// because of the for loop in main so we keep it in the player ArrayList and we
+				// use the PlayerOutOfTheGame trick to check if the player's still playing
 				
-				//we remove the player from the playing players pool
-				players.remove(p);
+				playersOutOfTheGame.add(p);
 
 			}
 		}

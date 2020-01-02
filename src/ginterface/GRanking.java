@@ -14,8 +14,8 @@ import code.GameSettings;
 
 public class GRanking {
 
-	public int[] xPosistions = { 375, 82, 447 };
-	public int[] yPosistions = { 62, 136, 136 };
+	public int[] xPosistions = { 450, 285, 625, 80 };
+	public int[] yPosistions = { 62, 136, 150, 300 };
 
 	public GRanking() {
 		
@@ -23,34 +23,32 @@ public class GRanking {
 
 		Font myFont = new Font("Large", Font.BOLD, 25);
 
-		JButton podium = new JButton(new ImageIcon("src/images/podium.png"));
-		podium.setBounds(100, 100, 650, 400);
-		podium.setRolloverEnabled(false);
-		podium.setBorderPainted(false);
-		f.add(podium);
 		
-		//GameSettings.ranking.size()
 		
-		for (int i = 0; i < 3; i++) {
-			// GameSettings.ranking.get(i).getTurtle().getType()
+		
+		
+		for (int i = 0; i < GameSettings.ranking.size(); i++) {
+			
 			
 			JLabel bTortue = new JLabel(
-					new ImageIcon("src/images/" + "RedTurtle" + "/S.png"));
+					new ImageIcon("src/images/" + GameSettings.ranking.get(i).getTurtle().getType() + "/S.png"));
 			bTortue.setBounds(xPosistions[i], yPosistions[i], 98, 98);
-			//bTortue.setRolloverEnabled(false);
-			//bTortue.setBorderPainted(false);
 			f.add(bTortue);
 			
-			//GameSettings.ranking.get(i).getName()
 			
-			Label label = new Label("lol");
-			label.setBounds(100, 40, 600, 50);
+			
+			Label label = new Label(GameSettings.ranking.get(i).getName());
+			label.setBounds(xPosistions[i]-10, yPosistions[i]-40, 160, 30);
 			label.setFont(myFont);
 			f.add(label);
 
 		}
+		
+		JLabel podium = new JLabel(new ImageIcon("src/images/podium.png"));
+		podium.setBounds(175, 100, 650, 400);
+		f.add(podium);
 
-		f.setSize(875, 600);
+		f.setSize(1025, 600);
 
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - f.getWidth()) / 2);
