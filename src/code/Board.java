@@ -1,7 +1,10 @@
 package code;
 
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.TreeSet;
 
 public class Board {
 
@@ -118,5 +121,42 @@ public class Board {
 			System.out.println("");
 
 		}
+	}
+	
+	public void bfs() {
+		ArrayDeque<Integer> queue = new ArrayDeque<Integer>();
+		TreeSet<Integer> discovered = new TreeSet<Integer>();
+		ArrayList<Integer> path = new ArrayList<Integer>();
+
+		queue.push(depart);
+		int node = 0;
+		while (queue.size() != 0) {
+			node = queue.pop();
+			if (!discovered.contains(node)) {
+				discovered.add(node);
+				path.add(node);
+
+				try {
+
+					for (int i = 0; i < ((graph.get(node)).size()); i++) { // la on fait pour chaque voisin du node
+						if (!discovered.contains((graph.get(node)).get(i))) { // on verifie si le voisin du node est pas
+																				// dans discovered
+
+							// discovered.add((graph.get(node)).get(i));
+							queue.push((graph.get(node)).get(i));
+
+						}
+					}
+
+				} catch (Exception e) {
+					// cas ou il y a pas de voisin, size = null, on fait rien
+
+				}
+
+			}
+
+		}
+		System.out.println(path);
+		
 	}
 }
