@@ -4,6 +4,7 @@ package code;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class Board {
@@ -123,7 +124,7 @@ public class Board {
 		}
 	}
 	
-	public void bfs() {
+	public static void dfs(Player p) {
 		ArrayDeque<Integer> queue = new ArrayDeque<Integer>();
 		TreeSet<Integer> discovered = new TreeSet<Integer>();
 		ArrayList<Integer> path = new ArrayList<Integer>();
@@ -157,6 +158,5 @@ public class Board {
 
 		}
 		System.out.println(path);
-		
 	}
 }
