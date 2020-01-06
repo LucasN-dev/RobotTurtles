@@ -121,10 +121,11 @@ public class Board {
 		}
 	}
 
-	public void bfs(Player p) {
+	public boolean bfs(Player p) {
 		ArrayDeque<int[]> queue = new ArrayDeque<int[]>();
 		TreeSet<int[]> discovered = new TreeSet<int[]>();
 		ArrayList<int[]> path = new ArrayList<int[]>();
+		int reachableJewels = 0;
 
 		queue.add(GameSettings.turtlesPositions.get(p.turtle.getType()));
 		int[] node = { 0, 0 };
@@ -149,10 +150,70 @@ public class Board {
 									queue.add(neighbourNode);
 								} catch (Exception e) {
 									//nothing happens
+									for (int k = 0; k < GameSettings.jewelsPositions.size(); k++) {
+										if (GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet().toArray()[k])[0] == neighbourNode[0]
+												&& GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet().toArray()[k])[1] == neighbourNode[1]) {
+											reachableJewels += 1;
+										}
+									}
 								}
-							}
-							break;
+							} break;
+						case 2:
+							neighbourNode = node;
+							neighbourNode[1] = neighbourNode[1] + 1;
+							if (!discovered.contains(neighbourNode)) {
+								try {
+									board[neighbourNode[0]][neighbourNode[1]].equals("      ");
+									//if the node is empty, we add it to the queue
+									queue.add(neighbourNode);
+								} catch (Exception e) {
+									//nothing happens
+									for (int k = 0; k < GameSettings.jewelsPositions.size(); k++) {
+										if (GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet().toArray()[k])[0] == neighbourNode[0]
+												&& GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet().toArray()[k])[1] == neighbourNode[1]) {
+											reachableJewels += 1;
+										}
+									}
+								}
+							} break;
+							case 3:
+								neighbourNode = node;
+								neighbourNode[0] = neighbourNode[0] + 1;
+								if (!discovered.contains(neighbourNode)) {
+									try {
+										board[neighbourNode[0]][neighbourNode[1]].equals("      ");
+										//if the node is empty, we add it to the queue
+										queue.add(neighbourNode);
+									} catch (Exception e) {
+										//nothing happens
+										for (int k = 0; k < GameSettings.jewelsPositions.size(); k++) {
+											if (GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet().toArray()[k])[0] == neighbourNode[0]
+													&& GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet().toArray()[k])[1] == neighbourNode[1]) {
+												reachableJewels += 1;
+											}
+										}
+									}
+								} break;
+							case 4:
+								neighbourNode = node;
+								neighbourNode[0] = neighbourNode[0] - 1;
+								if (!discovered.contains(neighbourNode)) {
+									try {
+										board[neighbourNode[0]][neighbourNode[1]].equals("      ");
+										//if the node is empty, we add it to the queue
+										queue.add(neighbourNode);
+									} catch (Exception e) {
+										//nothing happens
+										for (int k = 0; k < GameSettings.jewelsPositions.size(); k++) {
+											if (GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet().toArray()[k])[0] == neighbourNode[0]
+													&& GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet().toArray()[k])[1] == neighbourNode[1]) {
+												reachableJewels += 1;
+											}
+										}
+									}
+								} break;
 						}
+
 						discovered.add(neighbourNode);
 
 					} catch (Exception e) {
@@ -163,5 +224,11 @@ public class Board {
 
 		}
 		System.out.println(path);
+		if (reachableJewels == GameSettings.jewelsPositions.size()) {
+			return true;
+		}
+		else {
+			return false; }
 	}
+
 }
