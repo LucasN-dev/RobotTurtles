@@ -190,7 +190,11 @@ public class GBuildWall {
 		
 		
 		
+		Board.bfs();
 		
+		//if (!blocked) {
+		//	System.out.println("MUR BLOQUANT");
+		//}
 
 		
 		
