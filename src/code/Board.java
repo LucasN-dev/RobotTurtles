@@ -127,7 +127,8 @@ public class Board {
 		ArrayList<int[]> path = new ArrayList<int[]>();
 
 		queue.add(GameSettings.turtlesPositions.get(p.turtle.getType()));
-		int[] node = {0,0};
+		int[] node = { 0, 0 };
+		int[] neighbourNode = { 0, 0 };
 		while (queue.size() != 0) {
 			node = queue.poll();
 			if (!discovered.contains(node)) {
@@ -136,16 +137,26 @@ public class Board {
 
 				for (int i = 0; i < 4; i++) { // la on fait pour chaque voisin du node
 					try {
-						if (!discovered.contains((graph.get(node)).get(i))) { // on verifie si le voisin du node est pas
-							// dans discovered
 
-							// discovered.add((graph.get(node)).get(i)); erreur dans le pseudocode ?? si on
-							// ajoute le voisin au discovered on peut
-							// pas retourner dans les boucles pcq le node est deja dans le discovered
-							queue.add((graph.get(node)).get(i));
-
+						switch (i) {
+						case 1:
+							neighbourNode = node;
+							neighbourNode[1] = neighbourNode[1] - 1;
+							if (!discovered.contains(neighbourNode)) {
+								try {
+									board[neighbourNode[0]][neighbourNode[1]].equals("      ");
+									//if the node is empty, we add it to the queue
+									queue.add(neighbourNode);
+								} catch (Exception e) {
+									//nothing happens
+								}
+							}
+							break;
 						}
-					} catch (Exception e) { }
+						discovered.add(neighbourNode);
+
+					} catch (Exception e) {
+					}
 
 				}
 			}
