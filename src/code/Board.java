@@ -134,11 +134,10 @@ public class Board {
 				discovered.add(node);
 				path.add(node);
 
-				try {
-
-					for (int i = 0; i < ((graph.get(node)).size()); i++) { // la on fait pour chaque voisin du node
+				for (int i = 0; i < 4; i++) { // la on fait pour chaque voisin du node
+					try {
 						if (!discovered.contains((graph.get(node)).get(i))) { // on verifie si le voisin du node est pas
-																				// dans discovered
+							// dans discovered
 
 							// discovered.add((graph.get(node)).get(i)); erreur dans le pseudocode ?? si on
 							// ajoute le voisin au discovered on peut
@@ -146,13 +145,9 @@ public class Board {
 							queue.add((graph.get(node)).get(i));
 
 						}
-					}
-
-				} catch (Exception e) {
-					// cas ou il y a pas de voisin, size = null, on fait rien
+					} catch (Exception e) { }
 
 				}
-
 			}
 
 		}
