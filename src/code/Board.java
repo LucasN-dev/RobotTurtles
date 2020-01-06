@@ -1,13 +1,10 @@
 package code;
 
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
-
-
 
 public class Board {
 
@@ -20,10 +17,9 @@ public class Board {
 				board[i][j] = "      ";
 			}
 		}
-		
-		
+
 		GameSettings.jewelsPositions = new LinkedHashMap<Jewel, int[]>();
-		
+
 		switch (GameSettings.numberPlayers) {
 		case 2:
 			board[0][1] = GameSettings.turtles.get("BlueTurtle");
@@ -35,7 +31,7 @@ public class Board {
 			GameSettings.updateTurtleStartingPosition("RedTurtle", 0, 5);
 
 			board[7][3] = GameSettings.jewels.get("GreenJewel");
-			GameSettings.jewelsPositions.put(GameSettings.jewels.get("GreenJewel"), new int[]{ 7,3 });
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("GreenJewel"), new int[] { 7, 3 });
 
 			for (int i = 0; i < 8; i++) {
 				board[i][7] = GameSettings.stoneWalls.get(0);
@@ -56,13 +52,13 @@ public class Board {
 			GameSettings.updateTurtleStartingPosition("GreenTurtle", 0, 5);
 
 			board[7][0] = GameSettings.jewels.get("PurpleJewel");
-			GameSettings.jewelsPositions.put(GameSettings.jewels.get("PurpleJewel"), new int[]{ 7,0 });
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("PurpleJewel"), new int[] { 7, 0 });
 
 			board[7][3] = GameSettings.jewels.get("GreenJewel");
-			GameSettings.jewelsPositions.put(GameSettings.jewels.get("GreenJewel"), new int[]{ 7,3 });
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("GreenJewel"), new int[] { 7, 3 });
 
 			board[7][5] = GameSettings.jewels.get("BlueJewel");
-			GameSettings.jewelsPositions.put(GameSettings.jewels.get("BlueJewel"), new int[]{ 7,5 });
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("BlueJewel"), new int[] { 7, 5 });
 
 			for (int i = 0; i < 8; i++) {
 				board[i][7] = GameSettings.stoneWalls.get(0);
@@ -88,14 +84,13 @@ public class Board {
 			GameSettings.updateTurtleStartingPosition("PurpleTurtle", 0, 7);
 
 			board[7][1] = GameSettings.jewels.get("PurpleJewel");
-			GameSettings.jewelsPositions.put(GameSettings.jewels.get("PurpleJewel"), new int[]{ 7,1 });
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("PurpleJewel"), new int[] { 7, 1 });
 
 			board[7][6] = GameSettings.jewels.get("BlueJewel");
-			GameSettings.jewelsPositions.put(GameSettings.jewels.get("PurpleJewel"), new int[]{ 7,6 });
+			GameSettings.jewelsPositions.put(GameSettings.jewels.get("PurpleJewel"), new int[] { 7, 6 });
 
 		}
-		
-		
+
 	}
 
 	public Object[][] getBoard() {
@@ -125,28 +120,30 @@ public class Board {
 
 		}
 	}
-	
-	public void dfs(Player p) {
+
+	public void bfs(Player p) {
 		ArrayDeque<int[]> queue = new ArrayDeque<int[]>();
 		TreeSet<int[]> discovered = new TreeSet<int[]>();
 		ArrayList<int[]> path = new ArrayList<int[]>();
 
-		queue.push(GameSettings.turtlesPositions.get(p.turtle.getType()));
-		int[] node = {0, 0};
+		queue.add(GameSettings.turtlesPositions.get(p.turtle.getType()));
+		int[] node = {0,0};
 		while (queue.size() != 0) {
-			node = queue.pop();
+			node = queue.poll();
 			if (!discovered.contains(node)) {
 				discovered.add(node);
 				path.add(node);
 
 				try {
 
-					for (int i = 0; i < ((this[node[0]][node[1]]).size()); i++) { // la on fait pour chaque voisin du node
-						if (!discovered.contains((this[node[0]][node[1]]).get(i))) { // on verifie si le voisin du node est pas
+					for (int i = 0; i < ((graph.get(node)).size()); i++) { // la on fait pour chaque voisin du node
+						if (!discovered.contains((graph.get(node)).get(i))) { // on verifie si le voisin du node est pas
 																				// dans discovered
 
-							// discovered.add((graph.get(node)).get(i));
-							queue.push((this[node[0]][node[1]]).get(i));
+							// discovered.add((graph.get(node)).get(i)); erreur dans le pseudocode ?? si on
+							// ajoute le voisin au discovered on peut
+							// pas retourner dans les boucles pcq le node est deja dans le discovered
+							queue.add((graph.get(node)).get(i));
 
 						}
 					}
