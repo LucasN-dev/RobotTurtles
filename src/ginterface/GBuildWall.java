@@ -190,11 +190,11 @@ public class GBuildWall {
 		
 		
 		
-		Board.bfs();
+		boolean blocked = Board.bfs();
 		
-		//if (!blocked) {
-		//	System.out.println("MUR BLOQUANT");
-		//}
+		if (!blocked) {
+			System.out.println("MUR BLOQUANT");
+		}
 
 		
 		
