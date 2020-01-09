@@ -98,15 +98,33 @@ public class GBuildWall {
 								switch (choice) {
 								case 1:
 									board[x][y] = p.stoneWalls.get(0);
-									p.stoneWalls.remove(0);
+
+									boolean blocked = Board.bfs();
+									if (blocked) {
+										System.out.println("MUR BLOQUANT");
+										board[x][y] = "      ";
+
+										GErrorWall.closed = false;
+										new GErrorWall();
+										
+									} else {
+										p.stoneWalls.remove(0);
+										done = true;
+										f.dispose();
+
+									}
+
 									break;
 								case 2:
 									board[x][y] = p.iceWalls.get(0);
 									p.iceWalls.remove(0);
+
+									done = true;
+									f.dispose();
+
 									break;
 								}
-								done = true;
-								f.dispose();
+
 							}
 
 						}
@@ -126,27 +144,24 @@ public class GBuildWall {
 		// JCheckboxes and we put the images next to it
 
 		Font myFont2 = new Font("LessLarge", Font.BOLD, 18);
-		
+
 		CheckboxGroup cbg = new CheckboxGroup();
-		
+
 		if (!p.stoneWalls.isEmpty()) {
-			
+
 			Label stoneNumber = new Label("x" + p.stoneWalls.size());
 			stoneNumber.setBounds(1130, 220, 40, 15);
 			stoneNumber.setFont(myFont2);
 			f.add(stoneNumber);
-			
-			
+
 			JLabel StoneWall = new JLabel(new ImageIcon("src/images/StoneWall.png"));
 			StoneWall.setBounds(1020, 150, 98, 98);
 			f.add(StoneWall);
-			
+
 			Checkbox checkBoxStone = new Checkbox("", cbg, false);
 			checkBoxStone.setBounds(1000, 100, 200, 200);
 			f.add(checkBoxStone);
-			
-			
-			
+
 			// choice = 0 : nothing chosen
 			checkBoxStone.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent e) {
@@ -154,28 +169,24 @@ public class GBuildWall {
 					ticked = true;
 				}
 			});
-			
+
 		}
-		
-		
-		
+
 		if (!p.iceWalls.isEmpty()) {
-			
+
 			Label stoneNumber = new Label("x" + p.iceWalls.size());
-			stoneNumber.setBounds(1130,420, 40, 15);
+			stoneNumber.setBounds(1130, 420, 40, 15);
 			stoneNumber.setFont(myFont2);
 			f.add(stoneNumber);
-			
+
 			JLabel IceWall = new JLabel(new ImageIcon("src/images/IceWall.png"));
 			IceWall.setBounds(1020, 350, 98, 98);
 			f.add(IceWall);
-			
+
 			Checkbox checkBoxIce = new Checkbox("", cbg, false);
 			checkBoxIce.setBounds(1000, 300, 200, 200);
 			f.add(checkBoxIce);
-			
-			
-			
+
 			// choice = 0 : nothing chosen
 			checkBoxIce.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent e) {
@@ -186,18 +197,6 @@ public class GBuildWall {
 
 		}
 
-		
-		
-		
-		
-		boolean blocked = Board.bfs();
-		
-		if (!blocked) {
-			System.out.println("MUR BLOQUANT");
-		}
-
-		
-		
 		f.setSize(1400, 950);
 
 		f.setLayout(null);

@@ -63,12 +63,14 @@ public class Main {
 		case 2:
 			GameSettings.players.get(0).setTurtle(GameSettings.turtles.get("BlueTurtle"));
 			GameSettings.players.get(1).setTurtle(GameSettings.turtles.get("RedTurtle"));
+			GameSettings.jewelsAmount = 1; // used for the placing wall function
 			break;
 
 		case 3:
 			GameSettings.players.get(0).setTurtle(GameSettings.turtles.get("RedTurtle"));
 			GameSettings.players.get(1).setTurtle(GameSettings.turtles.get("BlueTurtle"));
 			GameSettings.players.get(2).setTurtle(GameSettings.turtles.get("GreenTurtle"));
+			GameSettings.jewelsAmount = 3; // used for the placing wall function
 
 			break;
 
@@ -77,6 +79,7 @@ public class Main {
 			GameSettings.players.get(1).setTurtle(GameSettings.turtles.get("BlueTurtle"));
 			GameSettings.players.get(2).setTurtle(GameSettings.turtles.get("GreenTurtle"));
 			GameSettings.players.get(3).setTurtle(GameSettings.turtles.get("PurpleTurtle"));
+			GameSettings.jewelsAmount = 2; // used for the placing wall function
 
 			break;
 
@@ -115,7 +118,7 @@ public class Main {
 					// remove the players who reached a jewel from this list to avoid bugs. So we
 					// check which player is in "players" but not in "ranking" and we add him at the
 					// end
-					
+
 					for (int j = 0; j < GameSettings.players.size(); j++) {
 						Player plast = GameSettings.players.get(j);
 						if (!GameSettings.ranking.contains(plast)) {

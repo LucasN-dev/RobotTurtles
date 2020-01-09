@@ -3,6 +3,8 @@ package code;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Comparator;
@@ -123,169 +125,72 @@ public class Board {
 	}
 
 	public static boolean bfs() {
-		
+
+		// the idea is that we get from one turtle's position and we try to reach every
+		// other turtle and every Jewel, if they are all reachable then the new wall
+		// doesn't block anything, if not then it can't be placed
 
 		int reachableJewels = 0;
+		int reachableTurtles = 0;
 
-		for (int l = 0; l < GameSettings.numberPlayers; l++) {
-			
-			System.out.println("l= " + l);
-			
-			ArrayDeque<int[]> queue = new ArrayDeque<int[]>();
+		boolean[][] discovered = new boolean[8][8];
 
-			TreeSet<int[]> discovered = new TreeSet<int[]>(new Comparator<int[]>() {
-				@Override
-				public int compare(int[] a, int[] b) {
-					if (a[0] == b[0] && a[1] == b[1]) {
-						return 1;
-					} else {
-						return 0;
-					}
+		Queue<String> queue = new LinkedList<>();
 
+		queue.add(GameSettings.turtlesPositions.get(GameSettings.players.get(0).getTurtle().getType())[0] + ","
+				+ GameSettings.turtlesPositions.get(GameSettings.players.get(0).getTurtle().getType())[1]);
+
+		System.out.println("Breadth-First Traversal: ");
+		while (queue.isEmpty() == false) {
+
+			String pos = queue.remove();
+			int x = Integer.parseInt(pos.split(",")[0]);
+			int y = Integer.parseInt(pos.split(",")[1]);
+
+			if (x < 0 || y < 0 || x >= 8 || y >= 8 || discovered[x][y])
+				continue;
+
+			discovered[x][y] = true;
+			System.out.println(x + "," + y + " ");
+
+			IceWall booleanIceWall = new IceWall();
+
+			// below we want to test if what's inside the board's cell is a String (meaning
+			// it's empty) or an iceWall (breakable), we have to instantiate the wall and
+			// create a String because we are in a static method thus we can't just write
+			// IceWall.getClass() as it is a non-static reference
+
+			if (board[x][y].getClass() == "String".getClass()
+					|| board[x][y].getClass() == booleanIceWall.getClass()
+					|| board[x][y].getClass() == GameSettings.turtles
+							.get(GameSettings.turtles.keySet().toArray()[0]).getClass()) {
+
+				queue.add(x + "," + (y - 1));
+				queue.add(x + "," + (y + 1));
+				queue.add((x - 1) + "," + y);
+				queue.add((x + 1) + "," + y);
+
+				if (board[x][y].getClass() == GameSettings.turtles.get(GameSettings.turtles.keySet().toArray()[0])
+						.getClass()) {
+					reachableTurtles = reachableTurtles + 1;
 				}
-			});
-			
-
-			queue.add(GameSettings.turtlesPositions.get(GameSettings.turtlesPositions.keySet().toArray()[l]));
-			int[] node = { 0, 0 };
-			int[] neighbourNode = { 0, 0 };
-			while (queue.size() != 0) {
-				
-				node = queue.poll();
-
-				if (!discovered.contains(node)) {
-					discovered.add(node);
-
-					for (int i = 0; i < 4; i++) { // la on fait pour chaque voisin du node
-						try {
-
-							switch (i) {
-							case 1:
-								neighbourNode = node;
-								neighbourNode[1] = neighbourNode[1] - 1;
-								
-
-								if (!discovered.contains(neighbourNode)) {
-									try {
-										if (board[neighbourNode[0]][neighbourNode[1]].equals("      ")) {
-											// if the node is empty, we add it to the queue
-
-											System.out.println(neighbourNode[0] + " " + neighbourNode[1]);
-											
-											queue.add(neighbourNode);
-										}
-
-									} catch (Exception e) {
-
-										for (int k = 0; k < GameSettings.jewelsPositions.size(); k++) {
-											if (GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet()
-													.toArray()[k])[0] == neighbourNode[0]
-													&& GameSettings.jewelsPositions.get(GameSettings.jewelsPositions
-															.keySet().toArray()[k])[1] == neighbourNode[1]) {
-												reachableJewels += 1;
-
-											}
-										}
-									}
-								}
-								break;
-							case 2:
-								neighbourNode = node;
-								neighbourNode[1] = neighbourNode[1] + 1;
-								if (!discovered.contains(neighbourNode)) {
-									try {
-										if (board[neighbourNode[0]][neighbourNode[1]].equals("      ")) {
-											// if the node is empty, we add it to the queue
-											
-											System.out.println(neighbourNode[0] + " " + neighbourNode[1]);
-											
-											queue.add(neighbourNode);
-										}
-
-									} catch (Exception e) {
-										// nothing happens
-										for (int k = 0; k < GameSettings.jewelsPositions.size(); k++) {
-											if (GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet()
-													.toArray()[k])[0] == neighbourNode[0]
-													&& GameSettings.jewelsPositions.get(GameSettings.jewelsPositions
-															.keySet().toArray()[k])[1] == neighbourNode[1]) {
-												reachableJewels += 1;
-											}
-										}
-									}
-								}
-								break;
-							case 3:
-								neighbourNode = node;
-								neighbourNode[0] = neighbourNode[0] + 1;
-								if (!discovered.contains(neighbourNode)) {
-									try {
-										if (board[neighbourNode[0]][neighbourNode[1]].equals("      ")) {
-											// if the node is empty, we add it to the queue
-											
-											System.out.println(neighbourNode[0] + " " + neighbourNode[1]);
-											
-											queue.add(neighbourNode);
-										}
-
-									} catch (Exception e) {
-										// nothing happens
-										for (int k = 0; k < GameSettings.jewelsPositions.size(); k++) {
-											if (GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet()
-													.toArray()[k])[0] == neighbourNode[0]
-													&& GameSettings.jewelsPositions.get(GameSettings.jewelsPositions
-															.keySet().toArray()[k])[1] == neighbourNode[1]) {
-												reachableJewels += 1;
-											}
-										}
-									}
-								}
-								break;
-							case 4:
-								neighbourNode = node;
-								neighbourNode[0] = neighbourNode[0] - 1;
-								if (!discovered.contains(neighbourNode)) {
-									try {
-										if (board[neighbourNode[0]][neighbourNode[1]].equals("      ")) {
-											// if the node is empty, we add it to the queue
-											
-											System.out.println(neighbourNode[0] + " " + neighbourNode[1]);
-											
-											queue.add(neighbourNode);
-										}
-
-									} catch (Exception e) {
-										// nothing happens
-										for (int k = 0; k < GameSettings.jewelsPositions.size(); k++) {
-											if (GameSettings.jewelsPositions.get(GameSettings.jewelsPositions.keySet()
-													.toArray()[k])[0] == neighbourNode[0]
-													&& GameSettings.jewelsPositions.get(GameSettings.jewelsPositions
-															.keySet().toArray()[k])[1] == neighbourNode[1]) {
-												reachableJewels += 1;
-											}
-										}
-									}
-								}
-								break;
-							}
-
-							discovered.add(neighbourNode);
-
-						} catch (Exception e) {
-						}
-
-					}
-				}
-
 			}
 
+			else if (board[x][y].getClass() == GameSettings.jewels.get(GameSettings.jewels.keySet().toArray()[0])
+					.getClass()) {
+				reachableJewels = reachableJewels + 1;
+			}
+
+			// the last case where it's Stone Wall, we do nothing, we don't have to visit it
 		}
-		System.out.println(reachableJewels);
-		if (reachableJewels * GameSettings.numberPlayers == GameSettings.jewelsPositions.size()
-				* GameSettings.numberPlayers) {
-			return true;
-		} else {
+
+		System.out.println(reachableJewels + "J " + reachableTurtles + "T");
+
+		if (reachableJewels == GameSettings.jewelsAmount && reachableTurtles == GameSettings.numberPlayers) {
 			return false;
+		} else {
+			return true;
 		}
+
 	}
 }

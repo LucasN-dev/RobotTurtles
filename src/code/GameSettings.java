@@ -19,6 +19,8 @@ public class GameSettings {
 	public static ArrayList<StoneWall> stoneWalls;
 	public static ArrayList<IceWall> iceWalls;
 
+	public static int jewelsAmount;
+	
 	public static HashMap<String, int[]> turtlesPositions;
 	public static HashMap<String, Character> turtlesOrientations;
 
