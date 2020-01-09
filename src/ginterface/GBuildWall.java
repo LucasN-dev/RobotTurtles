@@ -106,7 +106,7 @@ public class GBuildWall {
 
 										GErrorWall.closed = false;
 										new GErrorWall();
-										
+
 									} else {
 										p.stoneWalls.remove(0);
 										done = true;
@@ -139,6 +139,17 @@ public class GBuildWall {
 		JLabel bg = new JLabel(new ImageIcon("src/images/Background.png"));
 		bg.setBounds(0, 0, 900, 900);
 		f.add(bg);
+		
+		
+		Font myFont = new Font("Large", Font.BOLD, 25);
+		Label label = new Label("Select the type of wall and");
+		Label label2 = new Label("place it on the board");
+		label.setBounds(965, 100, 500, 30);
+		label.setFont(myFont);
+		label2.setBounds(995, 130, 500, 30);
+		label2.setFont(myFont);
+		f.add(label);
+		f.add(label2);
 
 		// Because it is impossible to put an image inside a JCheckBox we create empty
 		// JCheckboxes and we put the images next to it
@@ -150,16 +161,16 @@ public class GBuildWall {
 		if (!p.stoneWalls.isEmpty()) {
 
 			Label stoneNumber = new Label("x" + p.stoneWalls.size());
-			stoneNumber.setBounds(1130, 220, 40, 15);
+			stoneNumber.setBounds(1175, 320, 40, 15);
 			stoneNumber.setFont(myFont2);
 			f.add(stoneNumber);
 
 			JLabel StoneWall = new JLabel(new ImageIcon("src/images/StoneWall.png"));
-			StoneWall.setBounds(1020, 150, 98, 98);
+			StoneWall.setBounds(1065, 250, 98, 98);
 			f.add(StoneWall);
 
 			Checkbox checkBoxStone = new Checkbox("", cbg, false);
-			checkBoxStone.setBounds(1000, 100, 200, 200);
+			checkBoxStone.setBounds(1045, 200, 200, 200);
 			f.add(checkBoxStone);
 
 			// choice = 0 : nothing chosen
@@ -175,16 +186,16 @@ public class GBuildWall {
 		if (!p.iceWalls.isEmpty()) {
 
 			Label stoneNumber = new Label("x" + p.iceWalls.size());
-			stoneNumber.setBounds(1130, 420, 40, 15);
+			stoneNumber.setBounds(1175, 520, 40, 15);
 			stoneNumber.setFont(myFont2);
 			f.add(stoneNumber);
 
 			JLabel IceWall = new JLabel(new ImageIcon("src/images/IceWall.png"));
-			IceWall.setBounds(1020, 350, 98, 98);
+			IceWall.setBounds(1065, 450, 98, 98);
 			f.add(IceWall);
 
 			Checkbox checkBoxIce = new Checkbox("", cbg, false);
-			checkBoxIce.setBounds(1000, 300, 200, 200);
+			checkBoxIce.setBounds(1045, 400, 200, 200);
 			f.add(checkBoxIce);
 
 			// choice = 0 : nothing chosen

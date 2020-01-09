@@ -33,7 +33,7 @@ public class GErrorWall {
 		bok.setBounds(300, 110, 70, 50);
 		f.add(bok);
 
-		f.setSize(730, 200);
+		f.setSize(685, 200);
 
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - f.getWidth()) / 2);
