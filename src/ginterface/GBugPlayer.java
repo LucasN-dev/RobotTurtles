@@ -43,7 +43,7 @@ public class GBugPlayer {
 				
 			
 				
-				b.setBounds(xpos[xi], 70, 98, 98);
+				b.setBounds(20+xpos[xi], 70, 98, 98);
 				f.add(b);
 				xi=xi+1;
 				
@@ -63,7 +63,7 @@ public class GBugPlayer {
 		int y = (int) ((dimension.getHeight() - f.getHeight()) / 4.2);
 		f.setLocation(x, y);
 
-		f.setSize(98*(xi+1), 250);
+		f.setSize(98*(xi+1)+40, 250);
 
 		f.setLayout(null);
 		f.setVisible(true);

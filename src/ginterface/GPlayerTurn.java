@@ -54,7 +54,16 @@ public class GPlayerTurn {
 			});
 
 		}
-
+		
+		if (p.isBugged) {
+		Label label3 = new Label();
+		label3.setFont(new Font("Large", Font.BOLD, 20));
+		label3.setBounds(715, 550, 350, 35);
+		label3.setText("You are bugged");
+		label3.setForeground(Color.RED);
+		f.add(label3);
+		}
+		
 		Button b3 = new Button("Run my program");
 		b3.setBounds(706, 480, 170, 50);
 		f.add(b3);
