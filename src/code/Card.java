@@ -41,11 +41,19 @@ public class Card {
 							GameSettings.turtleCollisionBackToStart(p.turtle,
 									(TurtleTile) board[position[0] - 1][position[1]], board);
 							// we remove the turtle for the previous positions
-							board[positionSave[0]][positionSave[1]] = "      ";
-							board[positionSave[0] - 1][positionSave[1]] = "      ";
 
-							p.discardDeck.add(this);
-							instructions.remove();
+							board[positionSave[0]][positionSave[1]] = "      ";
+
+							if (!(GameSettings.turtlesStartingPositions
+									.get(((TurtleTile) board[positionSave[0] - 1][positionSave[1]])
+											.getType())[0] == positionSave[0] - 1)
+									|| !(GameSettings.turtlesStartingPositions
+											.get(((TurtleTile) board[positionSave[0] - 1][positionSave[1]])
+													.getType())[1] == positionSave[1])) {
+								board[positionSave[0] - 1][positionSave[1]] = "      ";
+							}
+							// p.discardDeck.add(this);
+							// instructions.remove();
 						}
 
 					} catch (Exception ex) {
@@ -95,9 +103,19 @@ public class Card {
 							GameSettings.turtleCollisionBackToStart(p.turtle,
 									(TurtleTile) board[position[0]][position[1] + 1], board);
 							board[positionSave[0]][positionSave[1]] = "      ";
-							board[positionSave[0]][positionSave[1] + 1] = "      ";
-							p.discardDeck.add(this);
-							instructions.remove();
+
+							if (!(GameSettings.turtlesStartingPositions
+									.get(((TurtleTile) board[positionSave[0]][positionSave[1] + 1])
+											.getType())[0] == positionSave[0])
+									|| !(GameSettings.turtlesStartingPositions
+											.get(((TurtleTile) board[positionSave[0]][positionSave[1] + 1])
+													.getType())[1] == positionSave[1] + 1)) {
+								board[positionSave[0]][positionSave[1] + 1] = "      ";
+							}
+
+							// board[positionSave[0]][positionSave[1] + 1] = " ";
+							// p.discardDeck.add(this);
+							// instructions.remove();
 						}
 
 					} catch (Exception ex) {
@@ -133,9 +151,9 @@ public class Card {
 				}
 
 				else if (orientation == 'S') {
-					
+
 					System.out.println("un");
-					
+
 					try {
 						if (((TurtleTile) board[position[0] + 1][position[1]]).getType().equals("PurpleTurtle")
 								|| ((TurtleTile) board[position[0] + 1][position[1]]).getType().equals("GreenTurtle")
@@ -146,9 +164,19 @@ public class Card {
 							GameSettings.turtleCollisionBackToStart(p.turtle,
 									(TurtleTile) board[position[0] + 1][position[1]], board);
 							board[positionSave[0]][positionSave[1]] = "      ";
-							board[positionSave[0] + 1][positionSave[1]] = "      ";
-							p.discardDeck.add(this);
-							instructions.remove();
+
+							if (!(GameSettings.turtlesStartingPositions
+									.get(((TurtleTile) board[positionSave[0] + 1][positionSave[1]])
+											.getType())[0] == positionSave[0] + 1)
+									|| !(GameSettings.turtlesStartingPositions
+											.get(((TurtleTile) board[positionSave[0] + 1][positionSave[1]])
+													.getType())[1] == positionSave[1])) {
+								board[positionSave[0] + 1][positionSave[1]] = "      ";
+							}
+
+							// board[positionSave[0] + 1][positionSave[1]] = " ";
+							// p.discardDeck.add(this);
+							// instructions.remove();
 						}
 
 					} catch (Exception ex) {
@@ -198,9 +226,19 @@ public class Card {
 							GameSettings.turtleCollisionBackToStart(p.turtle,
 									(TurtleTile) board[position[0]][position[1] - 1], board);
 							board[positionSave[0]][positionSave[1]] = "      ";
-							board[positionSave[0]][positionSave[1] - 1] = "      ";
-							p.discardDeck.add(this);
-							instructions.remove();
+
+							if (!(GameSettings.turtlesStartingPositions
+									.get(((TurtleTile) board[positionSave[0]][positionSave[1] - 1])
+											.getType())[0] == positionSave[0])
+									|| !(GameSettings.turtlesStartingPositions
+											.get(((TurtleTile) board[positionSave[0]][positionSave[1] - 1])
+													.getType())[1] == positionSave[1] - 1)) {
+								board[positionSave[0]][positionSave[1] - 1] = "      ";
+							}
+
+							// board[positionSave[0]][positionSave[1] - 1] = " ";
+							// p.discardDeck.add(this);
+							// instructions.remove();
 						}
 
 					} catch (Exception ex) {
@@ -240,6 +278,9 @@ public class Card {
 				GBoard.updateGI();
 
 			} catch (Exception e) {
+
+				e.printStackTrace();
+
 				// le cas ou on essaye de sortir du plateau, on renvoi la tortue � la case
 				// d�part
 				position[0] = GameSettings.turtlesStartingPositions.get(p.turtle.getType())[0];
@@ -253,6 +294,7 @@ public class Card {
 				GameSettings.updateTurtlePosition(p.turtle.getType(), position[0], position[1]);
 
 			}
+
 		} else if ((this.getType().equals("YellowCard"))) {
 			switch (orientation) {
 			case 'N':

@@ -171,16 +171,16 @@ public class Main {
 					case 3:
 						p.program.runProgram(board, p);
 						break;
-						
+
 					case 4:
-						//bug
+						// bug
 						new GBugPlayer(p);
-						
+
 						while (!GBugPlayer.done) {
 							Thread.sleep(300);
 						}
-						
-						GBugPlayer.done=false;
+
+						GBugPlayer.done = false;
 					}
 
 					// pour test
