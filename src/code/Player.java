@@ -16,7 +16,9 @@ public class Player {
 	public String name;
 	public ArrayList<StoneWall> stoneWalls;
 	public ArrayList<IceWall> iceWalls;
-
+	
+	public boolean bugUsed;
+	public boolean isBugged;
 	
 	public Program program;
 	
@@ -74,6 +76,11 @@ public class Player {
 			Card Carte = new Card("LaserCard");
 			this.deck.add(Carte);
 		}
+		
+		
+		//we initiate the bug tile that is out of the main deck
+		bugUsed=false;
+		isBugged=false;
 	}
 
 	public ArrayList<Card> getDeck() {
@@ -169,6 +176,8 @@ public class Player {
 			Thread.sleep(300);
 		}
 	}
+	
+	
 	
 	
 }

@@ -124,7 +124,7 @@ public class Board {
 		}
 	}
 
-	public static boolean bfs() {
+	public static boolean blockingWallCheck() {
 
 		// the idea is that we get from one turtle's position and we try to reach every
 		// other turtle and every Jewel, if they are all reachable then the new wall
@@ -140,9 +140,11 @@ public class Board {
 		queue.add(GameSettings.turtlesPositions.get(GameSettings.players.get(0).getTurtle().getType())[0] + ","
 				+ GameSettings.turtlesPositions.get(GameSettings.players.get(0).getTurtle().getType())[1]);
 
-		System.out.println("Breadth-First Traversal: ");
 		while (queue.isEmpty() == false) {
 
+			// we use String for the positions because it is easier to compare than 2Ds
+			// arrays
+			
 			String pos = queue.remove();
 			int x = Integer.parseInt(pos.split(",")[0]);
 			int y = Integer.parseInt(pos.split(",")[1]);
@@ -160,10 +162,9 @@ public class Board {
 			// create a String because we are in a static method thus we can't just write
 			// IceWall.getClass() as it is a non-static reference
 
-			if (board[x][y].getClass() == "String".getClass()
-					|| board[x][y].getClass() == booleanIceWall.getClass()
-					|| board[x][y].getClass() == GameSettings.turtles
-							.get(GameSettings.turtles.keySet().toArray()[0]).getClass()) {
+			if (board[x][y].getClass() == "String".getClass() || board[x][y].getClass() == booleanIceWall.getClass()
+					|| board[x][y].getClass() == GameSettings.turtles.get(GameSettings.turtles.keySet().toArray()[0])
+							.getClass()) {
 
 				queue.add(x + "," + (y - 1));
 				queue.add(x + "," + (y + 1));

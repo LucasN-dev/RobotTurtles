@@ -44,7 +44,7 @@ public class GPlayerTurn {
 			Button b2 = new Button("Build a wall");
 			b2.setBounds(414, 480, 170, 50);
 			f.add(b2);
-			
+
 			b2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					f.dispose();
@@ -52,12 +52,28 @@ public class GPlayerTurn {
 					boolChoice = true;
 				}
 			});
-			
+
 		}
 
 		Button b3 = new Button("Run my program");
 		b3.setBounds(706, 480, 170, 50);
 		f.add(b3);
+
+		if (!p.bugUsed) {
+			Button bBug = new Button("bug a player");
+			bBug.setBounds(414, 580, 170, 50);
+			f.add(bBug);
+			
+			bBug.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					f.dispose();
+					GameSettings.playerChoice = 4;
+					p.bugUsed=true;
+					boolChoice = true;
+				}
+			});
+			
+		}
 
 		JLabel bTortue = new JLabel(new ImageIcon("src/images/" + p.getTurtle().getType() + "/S.png"));
 		bTortue.setBounds(890, 40, 98, 98);
@@ -100,7 +116,7 @@ public class GPlayerTurn {
 		int y = (int) ((dimension.getHeight() - f.getHeight()) / 4.2);
 		f.setLocation(x, y);
 
-		f.setSize(1000, 600);
+		f.setSize(1000, 690);
 
 		f.setLayout(null);
 		f.setVisible(true);
@@ -112,8 +128,6 @@ public class GPlayerTurn {
 				boolChoice = true;
 			}
 		});
-
-		
 
 		b3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -44,5 +44,19 @@ public class Program {
 		}
 
 	}
+	
+	//reverse program when bugged
+	public void reverseProgram() {
+		ArrayDeque<Card> tempProgram = new ArrayDeque<Card>();
+		
+		int size = this.program.size();
+		for (int i = 0; i < size; i++) {
+			tempProgram.addFirst(this.program.element());
+			this.program.remove();
+		}
+		
+		this.program=tempProgram;
+		
+	}
 
 }

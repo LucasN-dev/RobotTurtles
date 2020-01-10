@@ -99,7 +99,7 @@ public class GBuildWall {
 								case 1:
 									board[x][y] = p.stoneWalls.get(0);
 
-									boolean blocked = Board.bfs();
+									boolean blocked = Board.blockingWallCheck();
 									if (blocked) {
 										System.out.println("MUR BLOQUANT");
 										board[x][y] = "      ";

@@ -12,6 +12,7 @@ import ginterface.GErrorNoMoreCards;
 import ginterface.GNextPlayer;
 import ginterface.GPlayersNames;
 import ginterface.GBoard;
+import ginterface.GBugPlayer;
 import ginterface.GPlayerTurn;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -127,7 +128,6 @@ public class Main {
 
 					}
 					GRanking.main(args);
-					// TODO: victory GI + ranking
 				}
 
 				if (!GameSettings.gameEnd && !GameSettings.playersOutOfTheGame.contains(p)) {
@@ -171,7 +171,16 @@ public class Main {
 					case 3:
 						p.program.runProgram(board, p);
 						break;
-
+						
+					case 4:
+						//bug
+						new GBugPlayer(p);
+						
+						while (!GBugPlayer.done) {
+							Thread.sleep(300);
+						}
+						
+						GBugPlayer.done=false;
 					}
 
 					// pour test

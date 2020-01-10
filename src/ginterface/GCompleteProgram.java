@@ -18,7 +18,7 @@ public class GCompleteProgram {
 	public static boolean closed = false;
 	public HashMap<Integer, JButton> buttons;
 
-	public GCompleteProgram(ArrayList<Card> Main, ArrayDeque<Card> programme, TurtleTile t) {
+	public GCompleteProgram(ArrayList<Card> Main, ArrayDeque<Card> program, TurtleTile t) {
 
 		completed = false;
 		closed = false;
@@ -66,7 +66,7 @@ public class GCompleteProgram {
 			buttons.get(0).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					System.out.println(0);
-					programme.add(Main.get(0));
+					program.add(Main.get(0));
 					Main.remove(0);
 					closed = true;
 					f.dispose();
@@ -77,7 +77,7 @@ public class GCompleteProgram {
 			buttons.get(1).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					System.out.println(1);
-					programme.add(Main.get(1));
+					program.add(Main.get(1));
 					Main.remove(1);
 					closed = true;
 					f.dispose();
@@ -87,7 +87,7 @@ public class GCompleteProgram {
 			buttons.get(2).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					System.out.println(2);
-					programme.add(Main.get(2));
+					program.add(Main.get(2));
 					Main.remove(2);
 					closed = true;
 					f.dispose();
@@ -98,7 +98,7 @@ public class GCompleteProgram {
 			buttons.get(3).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					System.out.println(3);
-					programme.add(Main.get(3));
+					program.add(Main.get(3));
 					Main.remove(3);
 					closed = true;
 					f.dispose();
@@ -108,7 +108,7 @@ public class GCompleteProgram {
 			buttons.get(4).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					System.out.println(4);
-					programme.add(Main.get(4));
+					program.add(Main.get(4));
 					Main.remove(4);
 					closed = true;
 					f.dispose();
