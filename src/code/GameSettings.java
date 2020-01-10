@@ -1,11 +1,9 @@
 package code;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import ginterface.GBoard;
 
 public class GameSettings {
 

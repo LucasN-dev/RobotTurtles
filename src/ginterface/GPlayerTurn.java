@@ -15,6 +15,7 @@ public class GPlayerTurn {
 
 	public static boolean boolChoice;
 	public HashMap<Integer, JButton> buttons;
+	public static boolean everyoneIsBugged;
 
 	public GPlayerTurn(Player p) {
 		boolChoice = false;
@@ -54,34 +55,48 @@ public class GPlayerTurn {
 			});
 
 		}
-		
+
 		if (p.isBugged) {
-		Label label3 = new Label();
-		label3.setFont(new Font("Large", Font.BOLD, 20));
-		label3.setBounds(715, 550, 350, 35);
-		label3.setText("You are bugged");
-		label3.setForeground(Color.RED);
-		f.add(label3);
+			Label label3 = new Label();
+			label3.setFont(new Font("Large", Font.BOLD, 20));
+			label3.setBounds(715, 550, 350, 35);
+			label3.setText("You are bugged");
+			label3.setForeground(Color.RED);
+			f.add(label3);
 		}
-		
+
 		Button b3 = new Button("Run my program");
 		b3.setBounds(706, 480, 170, 50);
 		f.add(b3);
 
-		if (!p.bugUsed) {
+		// we check if every other player is bugged and if so the player can't bug
+		// anyone
+		everyoneIsBugged = false;
+
+		for (int i = 0; i < GameSettings.numberPlayers; i++) {
+
+			Player p2 = GameSettings.players.get(i);
+
+			if (!p2.equals(p) && p2.isBugged) {
+				everyoneIsBugged = true;
+			}
+
+		}
+
+		if (!p.bugUsed && !everyoneIsBugged) {
 			Button bBug = new Button("Bug a player");
 			bBug.setBounds(414, 580, 170, 50);
 			f.add(bBug);
-			
+
 			bBug.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					f.dispose();
 					GameSettings.playerChoice = 4;
-					p.bugUsed=true;
+					p.bugUsed = true;
 					boolChoice = true;
 				}
 			});
-			
+
 		}
 
 		JLabel bTortue = new JLabel(new ImageIcon("src/images/" + p.getTurtle().getType() + "/S.png"));

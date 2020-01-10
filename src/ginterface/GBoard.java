@@ -2,8 +2,6 @@ package ginterface;
 
 import java.awt.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import code.GameSettings;
@@ -15,6 +13,13 @@ import code.TurtleTile;
 
 public class GBoard extends Canvas {
 
+	/**
+	 * 
+	 */
+	
+	//to avoid a warning on GBoard
+	private static final long serialVersionUID = 1L;
+	
 	public static int[] giPosistions = { 45, 146, 247, 349, 450, 551, 653, 754, };
 	public static JFrame f = new JFrame("Robot Turtles Java Edition");
 	public static GBoard m = new GBoard();

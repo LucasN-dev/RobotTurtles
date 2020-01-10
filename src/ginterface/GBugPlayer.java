@@ -37,7 +37,7 @@ public class GBugPlayer {
 			Player p2=GameSettings.players.get(i);
 			
 			if (!p2.equals(p)
-					&& !GameSettings.playersOutOfTheGame.contains(p2)) {
+					&& !GameSettings.playersOutOfTheGame.contains(p2) && !p2.isBugged) {
 				JButton b = new JButton(
 						new ImageIcon("src/images/" + p2.getTurtle().getType() + "/S.png"));
 				

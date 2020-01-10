@@ -3,7 +3,6 @@ package code;
 import java.util.ArrayDeque;
 
 import ginterface.GBoard;
-import ginterface.GDiscard;
 
 public class Card {
 

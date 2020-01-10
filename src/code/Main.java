@@ -2,8 +2,6 @@ package code;
 
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
 import ginterface.GPlayersNumberButton;
 import ginterface.GRanking;
 import ginterface.GCompleteProgram;
