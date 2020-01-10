@@ -1,6 +1,7 @@
 package ginterface;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -23,8 +24,11 @@ public class GBugPlayer {
 		
 		JFrame f = new JFrame("Bug a player!");
 
-		Label label = new Label("Select a player to bug");
-		label.setBounds(10, 10, 200, 50);
+		Label label = new Label("Select a player");
+		label.setBounds(20, 10, 200, 50);
+		Font myFont = new Font("Large", Font.BOLD, 22);
+		label.setFont(myFont);
+		f.add(label);
 
 		int xi=0;
 		
@@ -39,7 +43,7 @@ public class GBugPlayer {
 				
 			
 				
-				b.setBounds(xpos[xi], 20, 98, 98);
+				b.setBounds(xpos[xi], 70, 98, 98);
 				f.add(b);
 				xi=xi+1;
 				
@@ -59,7 +63,7 @@ public class GBugPlayer {
 		int y = (int) ((dimension.getHeight() - f.getHeight()) / 4.2);
 		f.setLocation(x, y);
 
-		f.setSize(98*(xi+1), 200);
+		f.setSize(98*(xi+1), 250);
 
 		f.setLayout(null);
 		f.setVisible(true);

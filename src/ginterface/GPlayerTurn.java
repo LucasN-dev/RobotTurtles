@@ -60,7 +60,7 @@ public class GPlayerTurn {
 		f.add(b3);
 
 		if (!p.bugUsed) {
-			Button bBug = new Button("bug a player");
+			Button bBug = new Button("Bug a player");
 			bBug.setBounds(414, 580, 170, 50);
 			f.add(bBug);
 			
