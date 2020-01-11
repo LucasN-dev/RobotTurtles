@@ -126,6 +126,7 @@ public class Main {
 
 					}
 					GRanking.main(args);
+					break;
 				}
 
 				if (!GameSettings.gameEnd && !GameSettings.playersOutOfTheGame.contains(p)) {
