@@ -1,3 +1,3 @@
 # Turtles2
 
-Run the Main class in src/code
+Run the RobotTurtles.jar
