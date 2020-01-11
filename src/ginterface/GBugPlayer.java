@@ -24,8 +24,8 @@ public class GBugPlayer {
 		
 		JFrame f = new JFrame("Bug a player!");
 
-		Label label = new Label("Select a player");
-		label.setBounds(20, 10, 200, 50);
+		Label label = new Label("Select a player to bug");
+		label.setBounds(60, 25, 300, 50);
 		Font myFont = new Font("Large", Font.BOLD, 22);
 		label.setFont(myFont);
 		f.add(label);
@@ -38,12 +38,21 @@ public class GBugPlayer {
 			
 			if (!p2.equals(p)
 					&& !GameSettings.playersOutOfTheGame.contains(p2) && !p2.isBugged) {
+				
+				
+				Label name = new Label(p2.getName());
+				name.setBounds(60+xpos[xi], 200, 98, 20);
+				Font myFont2 = new Font("LessLarge", Font.BOLD, 12);
+				name.setFont(myFont2);
+				f.add(name);
+				
+				
 				JButton b = new JButton(
 						new ImageIcon("src/images/" + p2.getTurtle().getType() + "/S.png"));
 				
 			
 				
-				b.setBounds(20+xpos[xi], 70, 98, 98);
+				b.setBounds(60+xpos[xi], 100, 98, 98);
 				f.add(b);
 				xi=xi+1;
 				
@@ -63,7 +72,7 @@ public class GBugPlayer {
 		int y = (int) ((dimension.getHeight() - f.getHeight()) / 4.2);
 		f.setLocation(x, y);
 
-		f.setSize(98*(xi+1)+40, 250);
+		f.setSize(98*(xi+1)+130, 350);
 
 		f.setLayout(null);
 		f.setVisible(true);
