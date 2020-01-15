@@ -13,8 +13,8 @@ import code.GameSettings;
 
 public class GRanking {
 
-	public int[] xPosistions = { 450, 285, 625, 80 };
-	public int[] yPosistions = { 62, 136, 150, 300 };
+	public int[] xPosistions = { 455, 290, 630, 80 };
+	public int[] yPosistions = { 62, 136, 150, 400 };
 
 	public GRanking() {
 		
@@ -23,7 +23,15 @@ public class GRanking {
 		Font myFont = new Font("Large", Font.BOLD, 25);
 
 		
+		JLabel f1 = new JLabel(
+				new ImageIcon("src/images/fire1.gif"));
+		f1.setBounds(0, 40, 277, 269);
+		f.add(f1);
 		
+		JLabel f2 = new JLabel(
+				new ImageIcon("src/images/fire2.gif"));
+		f2.setBounds(770, 40, 277, 269);
+		f.add(f2);
 		
 		
 		for (int i = 0; i < GameSettings.ranking.size(); i++) {
