@@ -1,10 +1,8 @@
 package code;
 
-
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Queue;
-
 
 public class Board {
 
@@ -129,6 +127,7 @@ public class Board {
 
 		int reachableJewels = 0;
 		int reachableTurtles = 0;
+		int reachableStartingPositions = 0;
 
 		boolean[][] discovered = new boolean[8][8];
 
@@ -141,7 +140,7 @@ public class Board {
 
 			// we use String for the positions because it is easier to compare than 2Ds
 			// arrays
-			
+
 			String pos = queue.remove();
 			int x = Integer.parseInt(pos.split(",")[0]);
 			int y = Integer.parseInt(pos.split(",")[1]);
@@ -179,12 +178,25 @@ public class Board {
 				reachableJewels = reachableJewels + 1;
 			}
 
+			// we check if it's a turtle staring position because it has to be free if a
+			// turtle is teleported back to start
+			for (int r = 0; r < GameSettings.numberPlayers; r++) {
+				if (x == GameSettings.turtlesStartingPositions
+						.get(GameSettings.turtlesStartingPositions.keySet().toArray()[r])[0]
+						&& y == GameSettings.turtlesStartingPositions
+								.get(GameSettings.turtlesStartingPositions.keySet().toArray()[r])[1]) {
+					reachableStartingPositions = reachableStartingPositions + 1;
+
+				}
+			}
+
 			// the last case where it's Stone Wall, we do nothing, we don't have to visit it
 		}
 
 		System.out.println(reachableJewels + "J " + reachableTurtles + "T");
 
-		if (reachableJewels == GameSettings.jewelsAmount && reachableTurtles == GameSettings.numberPlayers) {
+		if (reachableJewels == GameSettings.jewelsAmount && reachableTurtles == GameSettings.numberPlayers
+				&& reachableStartingPositions == GameSettings.numberPlayers) {
 			return false;
 		} else {
 			return true;
