@@ -47,7 +47,7 @@ public class Board {
 			GameSettings.updateTurtlePosition("RedTurtle", 0, 3);
 			GameSettings.updateTurtleStartingPosition("RedTurtle", 0, 3);
 
-			board[0][5] = GameSettings.turtles.get("GreenTurtle");
+			board[0][6] = GameSettings.turtles.get("GreenTurtle");
 			GameSettings.updateTurtlePosition("GreenTurtle", 0, 6);
 			GameSettings.updateTurtleStartingPosition("GreenTurtle", 0, 6);
 
@@ -57,7 +57,7 @@ public class Board {
 			board[7][3] = GameSettings.jewels.get("GreenJewel");
 			GameSettings.jewelsPositions.put(GameSettings.jewels.get("GreenJewel"), new int[] { 7, 3 });
 
-			board[7][5] = GameSettings.jewels.get("BlueJewel");
+			board[7][6] = GameSettings.jewels.get("BlueJewel");
 			GameSettings.jewelsPositions.put(GameSettings.jewels.get("BlueJewel"), new int[] { 7, 6 });
 
 			for (int i = 0; i < 8; i++) {
