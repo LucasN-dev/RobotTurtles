@@ -1,3 +1,3 @@
 # Turtles2
 
-Run the RobotTurtles.jar
+Run RobotTurtles.jar
