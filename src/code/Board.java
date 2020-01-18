@@ -8,6 +8,7 @@ public class Board {
 
 	public static Object[][] board;
 
+	// we initialize the board, we put an empty String for an empty cell
 	public void setBoard() {
 		board = new Object[8][8];
 		for (int i = 0; i < 8; i++) {
@@ -16,11 +17,15 @@ public class Board {
 			}
 		}
 
+		// this hashmap will store the jewels position
 		GameSettings.jewelsPositions = new LinkedHashMap<Jewel, int[]>();
 
+		// we set the turtles and jewels position depending on the number of players
 		switch (GameSettings.numberPlayers) {
+		// 2 players
 		case 2:
 			board[0][1] = GameSettings.turtles.get("BlueTurtle");
+			// we update Turtles starting and current positions
 			GameSettings.updateTurtlePosition("BlueTurtle", 0, 1);
 			GameSettings.updateTurtleStartingPosition("BlueTurtle", 0, 1);
 
@@ -36,7 +41,9 @@ public class Board {
 				GameSettings.stoneWalls.remove(0);
 			}
 			break;
+
 		case 3:
+			// 3 players
 			board[0][0] = GameSettings.turtles.get("BlueTurtle");
 			GameSettings.updateTurtlePosition("BlueTurtle", 0, 0);
 			GameSettings.updateTurtleStartingPosition("BlueTurtle", 0, 0);
@@ -58,6 +65,7 @@ public class Board {
 			board[7][6] = GameSettings.jewels.get("BlueJewel");
 			GameSettings.jewelsPositions.put(GameSettings.jewels.get("BlueJewel"), new int[] { 7, 6 });
 
+			// we put some walls on the far right column
 			for (int i = 0; i < 8; i++) {
 				board[i][7] = GameSettings.stoneWalls.get(0);
 				GameSettings.stoneWalls.remove(0);
@@ -65,6 +73,7 @@ public class Board {
 
 			break;
 		case 4:
+			// 4 players
 			board[0][0] = GameSettings.turtles.get("BlueTurtle");
 			GameSettings.updateTurtlePosition("BlueTurtle", 0, 0);
 			GameSettings.updateTurtleStartingPosition("BlueTurtle", 0, 0);
@@ -91,12 +100,13 @@ public class Board {
 
 	}
 
+	// method to return the board
 	public Object[][] getBoard() {
 		return board;
 	}
 
 	public void printBoard() {
-		// for testing without GI
+		// for testing without graphic interface
 
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -119,20 +129,25 @@ public class Board {
 		}
 	}
 
+	// this is a DFS to check if a wall is blocking something when building one
 	public static boolean blockingWallCheck() {
 
 		// the idea is that we get from one turtle's position and we try to reach every
 		// other turtle and every Jewel, if they are all reachable then the new wall
 		// doesn't block anything, if not then it can't be placed
 
+		// variables with the number of reachable stuff
 		int reachableJewels = 0;
 		int reachableTurtles = 0;
 		int reachableStartingPositions = 0;
 
+		// the visited cells
 		boolean[][] discovered = new boolean[8][8];
 
+		// queue of cells
 		Queue<String> queue = new LinkedList<>();
 
+		// the first cell we visit is one of the turtle cells
 		queue.add(GameSettings.turtlesPositions.get(GameSettings.players.get(0).getTurtle().getType())[0] + ","
 				+ GameSettings.turtlesPositions.get(GameSettings.players.get(0).getTurtle().getType())[1]);
 
@@ -195,6 +210,7 @@ public class Board {
 
 		System.out.println(reachableJewels + "J " + reachableTurtles + "T");
 
+		// if everything is reachable, it returns "true"
 		if (reachableJewels == GameSettings.jewelsAmount && reachableTurtles == GameSettings.numberPlayers
 				&& reachableStartingPositions == GameSettings.numberPlayers) {
 			return false;

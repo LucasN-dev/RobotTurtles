@@ -8,6 +8,7 @@ public class Card {
 
 	public String type;
 
+	// can be blue, yellow, violet or laser
 	public Card(String type) {
 		this.type = type;
 	}
@@ -16,12 +17,17 @@ public class Card {
 		return this.type;
 	}
 
+	// we run the card, it means we try to perform on the board the action it's
+	// supposed to perform
 	public void runCard(Object[][] board, Player p) throws InterruptedException {
 
+		// we get the playe's program, turtle, position, etc
 		ArrayDeque<Card> instructions = p.program.getProgram();
 		int[] position = GameSettings.turtlesPositions.get(p.turtle.getType());
 		char orientation = GameSettings.turtlesOrientations.get(p.turtle.getType());
 		int[] positionSave = new int[2];
+		
+		//we use "position" as the current position of the Turtle, which may change and "positionSave" as its previous position before 
 
 		if (this.getType().equals("BlueCard")) {
 			try {
@@ -42,8 +48,8 @@ public class Card {
 							// we remove the turtle for the previous positions
 
 							board[positionSave[0]][positionSave[1]] = "      ";
-							
-							//when it's already at its starting position no need to remove it
+
+							// when it's already at its starting position no need to remove it
 							if (!(GameSettings.turtlesStartingPositions
 									.get(((TurtleTile) board[positionSave[0] - 1][positionSave[1]])
 											.getType())[0] == positionSave[0] - 1)
@@ -52,8 +58,6 @@ public class Card {
 													.getType())[1] == positionSave[1])) {
 								board[positionSave[0] - 1][positionSave[1]] = "      ";
 							}
-							// p.discardDeck.add(this);
-							// instructions.remove();
 						}
 
 					} catch (Exception ex) {
@@ -112,10 +116,6 @@ public class Card {
 													.getType())[1] == positionSave[1] + 1)) {
 								board[positionSave[0]][positionSave[1] + 1] = "      ";
 							}
-
-							// board[positionSave[0]][positionSave[1] + 1] = " ";
-							// p.discardDeck.add(this);
-							// instructions.remove();
 						}
 
 					} catch (Exception ex) {
@@ -173,10 +173,6 @@ public class Card {
 													.getType())[1] == positionSave[1])) {
 								board[positionSave[0] + 1][positionSave[1]] = "      ";
 							}
-
-							// board[positionSave[0] + 1][positionSave[1]] = " ";
-							// p.discardDeck.add(this);
-							// instructions.remove();
 						}
 
 					} catch (Exception ex) {
@@ -236,9 +232,6 @@ public class Card {
 								board[positionSave[0]][positionSave[1] - 1] = "      ";
 							}
 
-							// board[positionSave[0]][positionSave[1] - 1] = " ";
-							// p.discardDeck.add(this);
-							// instructions.remove();
 						}
 
 					} catch (Exception ex) {
@@ -279,7 +272,7 @@ public class Card {
 
 			} catch (Exception e) {
 
-				//e.printStackTrace();
+				// e.printStackTrace();
 
 				// le cas ou on essaye de sortir du plateau, on renvoi la tortue � la case
 				// d�part
@@ -462,10 +455,7 @@ public class Card {
 											.get(turtleType)[0]][GameSettings.turtlesStartingPositions
 													.get(turtleType)[1]] = board[targetPosition[0]][targetPosition[1]];
 
-									
-									
-									
-									//when it's already at its starting position no need to remove it
+									// when it's already at its starting position no need to remove it
 									if (!(GameSettings.turtlesStartingPositions
 											.get(((TurtleTile) board[targetPosition[0]][targetPosition[1]])
 													.getType())[0] == targetPosition[0])
