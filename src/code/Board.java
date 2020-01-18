@@ -24,8 +24,9 @@ public class Board {
 		switch (GameSettings.numberPlayers) {
 		// 2 players
 		case 2:
-			board[0][1] = GameSettings.turtles.get("BlueTurtle");
 			// we update Turtles starting and current positions
+
+			board[0][1] = GameSettings.turtles.get("BlueTurtle");
 			GameSettings.updateTurtlePosition("BlueTurtle", 0, 1);
 			GameSettings.updateTurtleStartingPosition("BlueTurtle", 0, 1);
 
@@ -201,6 +202,14 @@ public class Board {
 						&& y == GameSettings.turtlesStartingPositions
 								.get(GameSettings.turtlesStartingPositions.keySet().toArray()[r])[1]) {
 					reachableStartingPositions = reachableStartingPositions + 1;
+
+					System.out.println(GameSettings.turtlesStartingPositions
+							.get(GameSettings.turtlesStartingPositions.keySet().toArray()[r])[0] + " heeeere "
+							+ GameSettings.turtlesStartingPositions
+							.get(GameSettings.turtlesStartingPositions.keySet().toArray()[r])[1]);
+					System.out.println(x + "ehe" + y);
+					
+					System.out.println(GameSettings.turtlesStartingPositions.size());
 
 				}
 			}

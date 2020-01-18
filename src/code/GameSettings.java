@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-
 public class GameSettings {
 
 	public static boolean gameWon = false;
@@ -18,7 +17,7 @@ public class GameSettings {
 	public static ArrayList<IceWall> iceWalls;
 
 	public static int jewelsAmount;
-	
+
 	public static HashMap<String, int[]> turtlesPositions;
 	public static HashMap<String, Character> turtlesOrientations;
 
@@ -106,11 +105,30 @@ public class GameSettings {
 
 		turtlesStartingPositions = new HashMap<String, int[]>();
 
-		turtlesStartingPositions.put("BlueTurtle", posBleue2);
-		turtlesStartingPositions.put("RedTurtle", posRouge2);
-		turtlesStartingPositions.put("GreenTurtle", posVerte2);
-		turtlesStartingPositions.put("PurpleTurtle", posViolette2);
+		// to avoid a bug with the bfs and the blocking the starting position we need to
+		// only put in the turtlesStartingPositions ArrayList the turtles that will be
+		// on the board
+		
+		switch (numberPlayers) {
+		case 2:
+			turtlesStartingPositions.put("BlueTurtle", posBleue2);
+			turtlesStartingPositions.put("RedTurtle", posRouge2);
+			break;
 
+		case 3:
+			turtlesStartingPositions.put("BlueTurtle", posBleue2);
+			turtlesStartingPositions.put("RedTurtle", posRouge2);
+			turtlesStartingPositions.put("GreenTurtle", posVerte2);
+			break;
+
+		case 4:
+			turtlesStartingPositions.put("BlueTurtle", posBleue2);
+			turtlesStartingPositions.put("RedTurtle", posRouge2);
+			turtlesStartingPositions.put("GreenTurtle", posVerte2);
+			turtlesStartingPositions.put("PurpleTurtle", posViolette2);
+
+			break;
+		}
 	}
 
 	public static void updateTurtleStartingPosition(String Tortue, int x, int y) {
@@ -171,9 +189,8 @@ public class GameSettings {
 				System.out.println("We have a winner");
 
 				// we have to remove all the following cards in the player's program
-				
+
 				p.program.getProgram().clear();
-				
 
 				// we add the player to the ranking
 				ranking.add(p);
@@ -181,7 +198,7 @@ public class GameSettings {
 				// At first we removed the player from the playing pool but it could create bugs
 				// because of the for loop in main so we keep it in the player ArrayList and we
 				// use the PlayerOutOfTheGame trick to check if the player's still playing
-				
+
 				playersOutOfTheGame.add(p);
 
 			}
