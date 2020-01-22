@@ -128,7 +128,7 @@ public class Board {
 		}
 	}
 
-	// this is a DFS to check if a wall is blocking something when building one
+	// this is a BFS to check if a wall is blocking something when building one
 	public static boolean blockingWallCheck() {
 
 		// the idea is that we get from one turtle's position and we try to reach every
