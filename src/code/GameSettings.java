@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 
 public class GameSettings {
 
-	public static boolean gameWon = false;
 	public static int numberPlayers;
 
 	public static ArrayList<Player> players;
@@ -31,7 +30,6 @@ public class GameSettings {
 
 	public static LinkedHashMap<Jewel, int[]> jewelsPositions;
 	public static boolean gameEnd;
-	public static String winner;
 
 	public static ArrayList<Player> ranking = new ArrayList<Player>();
 	public static ArrayList<Player> playersOutOfTheGame = new ArrayList<Player>();
@@ -187,7 +185,6 @@ public class GameSettings {
 					.get(p.getTurtle().getType())[0]
 					&& jewelsPositions.get(jewelsPositions.keySet().toArray()[i])[1] == turtlesPositions
 							.get(p.getTurtle().getType())[1]) {
-				winner = p.getName();
 
 				board[turtlesPositions.get(p.getTurtle().getType())[0]][turtlesPositions
 						.get(p.getTurtle().getType())[1]] = jewelsPositions.keySet().toArray()[i];
