@@ -77,6 +77,9 @@ public class GBuildWall {
 
 				else {
 
+					// we put transparent buttons everywhere on the board where ther is no object,
+					// to place walls
+
 					JButton b = new JButton(new ImageIcon("src/images/Transparent.png"));
 					b.setBounds(giPosistions[j], giPosistions[i], 98, 98);
 					b.setContentAreaFilled(false);
@@ -100,7 +103,7 @@ public class GBuildWall {
 
 									boolean blocked = Board.blockingWallCheck();
 									if (blocked) {
-										System.out.println("MUR BLOQUANT");
+
 										board[x][y] = "      ";
 
 										GErrorWall.closed = false;
@@ -138,8 +141,7 @@ public class GBuildWall {
 		JLabel bg = new JLabel(new ImageIcon("src/images/Background.png"));
 		bg.setBounds(0, 0, 900, 900);
 		f.add(bg);
-		
-		
+
 		Font myFont = new Font("Large", Font.BOLD, 25);
 		Label label = new Label("Select the type of wall and");
 		Label label2 = new Label("place it on the board");

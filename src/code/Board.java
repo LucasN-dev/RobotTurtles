@@ -112,20 +112,18 @@ public class Board {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (board[i][j].getClass() == TurtleTile.class) {
-					System.out.print(((TurtleTile) board[i][j]).getType());
+
 				}
 
 				else if (board[i][j].getClass() == Jewel.class) {
-					System.out.print(((Jewel) board[i][j]).getType());
 
 				}
 
 				else {
-					System.out.print(board[i][j]);
+
 				}
 
 			}
-			System.out.println("");
 
 		}
 	}
@@ -165,7 +163,6 @@ public class Board {
 				continue;
 
 			discovered[x][y] = true;
-			System.out.println(x + "," + y + " ");
 
 			IceWall booleanIceWall = new IceWall();
 
@@ -203,21 +200,11 @@ public class Board {
 								.get(GameSettings.turtlesStartingPositions.keySet().toArray()[r])[1]) {
 					reachableStartingPositions = reachableStartingPositions + 1;
 
-					System.out.println(GameSettings.turtlesStartingPositions
-							.get(GameSettings.turtlesStartingPositions.keySet().toArray()[r])[0] + " heeeere "
-							+ GameSettings.turtlesStartingPositions
-							.get(GameSettings.turtlesStartingPositions.keySet().toArray()[r])[1]);
-					System.out.println(x + "ehe" + y);
-					
-					System.out.println(GameSettings.turtlesStartingPositions.size());
-
 				}
 			}
 
 			// the last case where it's Stone Wall, we do nothing, we don't have to visit it
 		}
-
-		System.out.println(reachableJewels + "J " + reachableTurtles + "T");
 
 		// if everything is reachable, it returns "true"
 		if (reachableJewels == GameSettings.jewelsAmount && reachableTurtles == GameSettings.numberPlayers

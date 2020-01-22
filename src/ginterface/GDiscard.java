@@ -57,17 +57,17 @@ public class GDiscard {
 		bTortue.setBounds(876, 1, 98, 98);
 		f.add(bTortue);
 
-		// TODO: mettre du son quand on clique sur la tortue
+		
 		bTortue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				// TODO: put sound when the player clicks the turtle
 			}
 		});
 
 		try {
 			buttons.get(0).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(0);
+
 					DiscardCartes.add(Main.get(0));
 					Main.remove(0);
 					closed = true;
@@ -78,7 +78,7 @@ public class GDiscard {
 
 			buttons.get(1).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(1);
+
 					DiscardCartes.add(Main.get(1));
 					Main.remove(1);
 					closed = true;
@@ -88,7 +88,7 @@ public class GDiscard {
 			});
 			buttons.get(2).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(2);
+
 					DiscardCartes.add(Main.get(2));
 					Main.remove(2);
 					closed = true;
@@ -99,7 +99,7 @@ public class GDiscard {
 
 			buttons.get(3).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(3);
+
 					DiscardCartes.add(Main.get(3));
 					Main.remove(3);
 					closed = true;
@@ -109,7 +109,7 @@ public class GDiscard {
 			});
 			buttons.get(4).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(4);
+
 					DiscardCartes.add(Main.get(4));
 					Main.remove(4);
 					closed = true;
@@ -123,7 +123,7 @@ public class GDiscard {
 
 		bterminer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("terminer");
+
 				closed = true;
 				completed = true;
 				f.dispose();
@@ -131,7 +131,8 @@ public class GDiscard {
 			}
 		});
 
-		// on centre la fenetre
+
+		//window position adjustment
 
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - f.getWidth()) / 2.2);

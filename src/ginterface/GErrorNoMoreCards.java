@@ -17,7 +17,7 @@ public class GErrorNoMoreCards {
 	public static boolean closed;
 
 	public GErrorNoMoreCards() {
-
+		
 		closed = false;
 
 		Frame f = new Frame("Error!");

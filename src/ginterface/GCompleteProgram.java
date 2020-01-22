@@ -55,17 +55,18 @@ public class GCompleteProgram {
 		bTortue.setBorderPainted(false);
 		f.add(bTortue);
 
-		// TODO: mettre du son quand on clique sur la tortue
 		bTortue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				// TODO: put sound when the player clicks the turtle
 			}
 		});
 
+		
+		// we put as many action listener as needed
 		try {
 			buttons.get(0).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(0);
+
 					program.add(Main.get(0));
 					Main.remove(0);
 					closed = true;
@@ -76,7 +77,7 @@ public class GCompleteProgram {
 
 			buttons.get(1).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(1);
+
 					program.add(Main.get(1));
 					Main.remove(1);
 					closed = true;
@@ -86,7 +87,7 @@ public class GCompleteProgram {
 			});
 			buttons.get(2).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(2);
+
 					program.add(Main.get(2));
 					Main.remove(2);
 					closed = true;
@@ -97,7 +98,7 @@ public class GCompleteProgram {
 
 			buttons.get(3).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(3);
+
 					program.add(Main.get(3));
 					Main.remove(3);
 					closed = true;
@@ -107,7 +108,7 @@ public class GCompleteProgram {
 			});
 			buttons.get(4).addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(4);
+
 					program.add(Main.get(4));
 					Main.remove(4);
 					closed = true;
@@ -121,7 +122,7 @@ public class GCompleteProgram {
 
 		bterminer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("terminer");
+
 				closed = true;
 				completed = true;
 				f.dispose();
@@ -129,7 +130,7 @@ public class GCompleteProgram {
 			}
 		});
 
-		// on centre la fenetre
+		// we adjust the window position
 
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - f.getWidth()) / 2.2);

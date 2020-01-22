@@ -21,13 +21,14 @@ public class Card {
 	// supposed to perform
 	public void runCard(Object[][] board, Player p) throws InterruptedException {
 
-		// we get the playe's program, turtle, position, etc
+		// we get the player's program, turtle, position, etc
 		ArrayDeque<Card> instructions = p.program.getProgram();
 		int[] position = GameSettings.turtlesPositions.get(p.turtle.getType());
 		char orientation = GameSettings.turtlesOrientations.get(p.turtle.getType());
 		int[] positionSave = new int[2];
-		
-		//we use "position" as the current position of the Turtle, which may change and "positionSave" as its previous position before 
+
+		// we use "position" as the current position of the Turtle, which may change and
+		// "positionSave" as its previous position before
 
 		if (this.getType().equals("BlueCard")) {
 			try {
@@ -90,7 +91,6 @@ public class Card {
 						}
 					}
 
-					System.out.println("yes");
 					p.discardDeck.add(this);
 					instructions.remove();
 				}
@@ -145,14 +145,12 @@ public class Card {
 							}
 						}
 					}
-					System.out.println("yes");
+
 					p.discardDeck.add(this);
 					instructions.remove();
 				}
 
 				else if (orientation == 'S') {
-
-					System.out.println("un");
 
 					try {
 						if (((TurtleTile) board[position[0] + 1][position[1]]).getType().equals("PurpleTurtle")
@@ -176,36 +174,36 @@ public class Card {
 						}
 
 					} catch (Exception ex) {
-						System.out.println("deux");
+
 						// case where the turtle is about to hit a stone wall
 						try {
 							if (((StoneWall) board[position[0] + 1][position[1]]).getType().equals("StoneWall")) {
-								System.out.println("PIERRE");
+
 								// the turtle doesn't move but turns around
 								orientation = 'N';
 								GameSettings.updateTurtleOrientation(p.turtle.getType(), orientation);
 							}
 
 						} catch (Exception e) {
-							System.out.println("trois");
+
 							// if it's not a stone wall we check for ice walls
 							// case where the turtle is about to hit an ice wall
 							try {
 								if (((IceWall) board[position[0] + 1][position[1]]).getType().equals("IceWall")) {
-									System.out.println("quatre");
+
 									// the turtle doesn't move but turns around
 									orientation = 'N';
 									GameSettings.updateTurtleOrientation(p.turtle.getType(), orientation);
 								}
 							} catch (Exception e2) {
-								System.out.println("what");
+
 								position[0] = position[0] + 1;
 								board[positionSave[0]][positionSave[1]] = "      ";
 								board[position[0]][position[1]] = p.turtle;
 							}
 						}
 					}
-					System.out.println("yes");
+
 					p.discardDeck.add(this);
 					instructions.remove();
 				}
@@ -261,7 +259,7 @@ public class Card {
 							}
 						}
 					}
-					System.out.println("yes");
+
 					p.discardDeck.add(this);
 					instructions.remove();
 				}
@@ -288,6 +286,7 @@ public class Card {
 
 			}
 
+			// for yellow cards, we check the current orientation and turn left
 		} else if ((this.getType().equals("YellowCard"))) {
 			switch (orientation) {
 			case 'N':
@@ -308,6 +307,7 @@ public class Card {
 			p.discardDeck.add(this);
 			instructions.remove();
 
+			// for purple cards, we check the current orientation and turn right
 		} else if ((this.getType().equals("PurpleCard"))) {
 			switch (orientation) {
 			case 'N':
@@ -331,9 +331,14 @@ public class Card {
 
 		}
 
+		// laser card
+		// we use the variable targetPosition, that will check, in a straight line, cell
+		// by cell, what the laser is supposed to hit.
 		else if ((this.getType().equals("LaserCard"))) {
 			int[] targetPosition = { position[0], position[1] };
 			boolean laserOutOfBoard = false;
+
+			// we first check if it gets out of bound because there's nothing to hit
 			switch (orientation) {
 			case 'N':
 				try {
@@ -391,8 +396,6 @@ public class Card {
 				break;
 
 			}
-			System.out.print(targetPosition[0] + " ");
-			System.out.println(targetPosition[1]);
 
 			if (!laserOutOfBoard) {
 				try {
@@ -418,10 +421,10 @@ public class Card {
 							String turtleType = ((TurtleTile) board[targetPosition[0]][targetPosition[1]]).getType();
 							if (turtleType.equals("PurpleTurtle") || turtleType.equals("GreenTurtle")
 									|| turtleType.equals("RedTurtle") || turtleType.equals("BlueTurtle")) {
-								// if it's a turtle, it depends on the number o players
+								// if it's a turtle, it depends on the number of players
 								if (GameSettings.numberPlayers == 2) {
 									// switch case depending on the turtle current orientation, as it has to turn
-									// around
+									// around or go back to start
 									GBoard.updateLaserGi(orientation, position);
 
 									switch (GameSettings.turtlesOrientations.get(turtleType)) {
@@ -470,7 +473,7 @@ public class Card {
 
 						} catch (Exception e3) {
 							// last possibility : it's a jewel, the laser gets reflected and the turtle goes
-							// back to its starting place
+							// back to its starting place or turns around
 							if (GameSettings.numberPlayers == 2) {
 								// switch case depending on the turtle current orientation, as it has to turn
 								// around

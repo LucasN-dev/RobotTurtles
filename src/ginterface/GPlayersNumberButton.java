@@ -19,7 +19,7 @@ public class GPlayersNumberButton {
 
 	public GPlayersNumberButton() {
 
-		
+		//main menu actually
 		
 		JFrame f = new JFrame("Welcome to Robot Turtles Java Edition!");
 

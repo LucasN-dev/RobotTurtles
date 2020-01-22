@@ -128,8 +128,7 @@ public class GPlayersNames {
 		new GPlayersNames();
 		while (!PlayersNamesChosen) {
 			Thread.sleep(500);
-			// petite astuce pas tres opti pour attendre que la fenetre se ferme ( et donc
-			// que le nombre de joueurs soit choisi pour passer a la suite)
+			
 		}
 
 	}

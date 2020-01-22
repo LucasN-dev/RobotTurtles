@@ -16,6 +16,8 @@ public class GameSettings {
 	public static ArrayList<StoneWall> stoneWalls;
 	public static ArrayList<IceWall> iceWalls;
 
+	// is used for the BFS function that checks if everything is reachable when you
+	// place a new wall in the Board class
 	public static int jewelsAmount;
 
 	public static HashMap<String, int[]> turtlesPositions;
@@ -23,7 +25,7 @@ public class GameSettings {
 
 	public static HashMap<String, int[]> turtlesStartingPositions;
 
-	public static int playerChoice; // 1 commpleter prog, 2 placer un mur, 3 exectuer prog
+	public static int playerChoice; // 1 complete program, 2 place a wall, 3 run program, 4 bug a player
 
 	public static ArrayList<String> playersNames;
 
@@ -34,7 +36,7 @@ public class GameSettings {
 	public static ArrayList<Player> ranking = new ArrayList<Player>();
 	public static ArrayList<Player> playersOutOfTheGame = new ArrayList<Player>();
 
-	// *** variables for laser GI ***
+	// *** variables for laser in graphic interface ***
 	public static boolean drawLaser = false;
 	public static int[] laserGIPosition = { 0, 0 };
 	public static char laserOrientation = 'S';
@@ -44,6 +46,7 @@ public class GameSettings {
 		return numberPlayers;
 	}
 
+	// we initialize all the tiles
 	public static void setTiles() {
 		turtles = new HashMap<String, TurtleTile>();
 		jewels = new HashMap<String, Jewel>();
@@ -86,6 +89,7 @@ public class GameSettings {
 
 	}
 
+	// we initialize the variables for turtles positions management
 	public static void setTurtlesPositions() {
 		turtlesPositions = new HashMap<String, int[]>();
 		int[] posBleue = { 0, 0 };
@@ -105,10 +109,10 @@ public class GameSettings {
 
 		turtlesStartingPositions = new HashMap<String, int[]>();
 
-		// to avoid a bug with the bfs and the blocking the starting position we need to
-		// only put in the turtlesStartingPositions ArrayList the turtles that will be
-		// on the board
-		
+		// to avoid a bug with the BFS (in the board class) and the blocking the
+		// starting position we need to only put in the turtlesStartingPositions
+		// ArrayList the turtles that will be on the board
+
 		switch (numberPlayers) {
 		case 2:
 			turtlesStartingPositions.put("BlueTurtle", posBleue2);
@@ -157,6 +161,7 @@ public class GameSettings {
 		turtlesOrientations.put(Tortue, direction);
 	}
 
+	// if two turtles hit themselves they have to go back to their staring position
 	public static void turtleCollisionBackToStart(TurtleTile t1, TurtleTile t2, Object[][] board) {
 		updateTurtlePosition(t1.getType(), turtlesStartingPositions.get(t1.getType())[0],
 				turtlesStartingPositions.get(t1.getType())[1]);
@@ -186,8 +191,7 @@ public class GameSettings {
 
 				board[turtlesPositions.get(p.getTurtle().getType())[0]][turtlesPositions
 						.get(p.getTurtle().getType())[1]] = jewelsPositions.keySet().toArray()[i];
-				System.out.println("We have a winner");
-
+				
 				// we have to remove all the following cards in the player's program
 
 				p.program.getProgram().clear();

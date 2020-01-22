@@ -16,14 +16,15 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
-	public static void main(String[] args) throws InterruptedException { // le throws c'est a cause du thread.sleep du
-																			// choix du nb de joueurs
+	public static void main(String[] args) throws InterruptedException {
 
-		// initialisation joueurs
+		// we call the graphic interface to get the number of players
 		GPlayersNumberButton.main(args);
 
+		// we get the players' names
 		GPlayersNames.main(args);
 
+		// we initialize all the players
 		GameSettings.players = new ArrayList<Player>();
 
 		for (int i = 0; i < GameSettings.getNumberOfPlayers(); i++) {
@@ -39,7 +40,7 @@ public class Main {
 
 		}
 
-		// initialisation tuiles et plateau
+		// initialization of the board and tiles
 
 		GameSettings.gameEnd = false;
 
@@ -54,7 +55,8 @@ public class Main {
 
 		board.getBoard();
 
-		board.printBoard();
+		// used for debugging
+		// board.printBoard();
 
 		GBoard.initializeBoardGI();
 
@@ -84,6 +86,7 @@ public class Main {
 
 		}
 
+		// initialization of decks and programs
 		for (int i = 0; i < GameSettings.numberPlayers; i++) {
 			Player p = GameSettings.players.get(i);
 
@@ -97,11 +100,7 @@ public class Main {
 
 		}
 
-		/**
-		 * while (!GestionJeu.partieGagne) { for (int i=0; i<GestionJeu.NombreDeJoueurs;
-		 * i++) { Joueur J = Joueurs.get(i); J.completerProgramme(); } }
-		 **/
-
+		// here we manage all the game's turns
 		while (!GameSettings.gameEnd) {
 
 			for (int i = 0; i < GameSettings.players.size(); i++) {
@@ -129,33 +128,36 @@ public class Main {
 					break;
 				}
 
+				// the next player's if the game has not ended and the player is still in the
+				// game
 				if (!GameSettings.gameEnd && !GameSettings.playersOutOfTheGame.contains(p)) {
 
+					// call the graphic interface to tell the player to give the computer to the
+					// next one
 					new GNextPlayer(p);
 
 					while (!GNextPlayer.closed) {
 						Thread.sleep(500);
-						// petite astuce pas tres opti pour attendre que la fenetre se ferme ( et donc
-						// que le nombre de joueurs soit choisi pour passer a la suite)
+						// little trick, not very clean, we found. We have to wait for the player to
+						// confirm its action on the graphic interface for it close, instead everything
+						// opens one after an other. We created the infinite while loop that waits
+						// checks if the player has made his choice waits again etc etc. Not very
+						// code/performance friendly but better than nothing, we use this loop quite
+						// many times in the code
 					}
 
+					// new gi player turn
 					new GPlayerTurn(p);
 
 					while (!GPlayerTurn.boolChoice) {
 						Thread.sleep(500);
-						// petite astuce pas tres opti pour attendre que la fenetre se ferme ( et donc
-						// que le nombre de joueurs soit choisi pour passer a la suite)
-					}
-
-					for (int k = 0; k < p.getHand().size(); k++) {
-						System.out.println(p.getHand().get(k).getType());
 					}
 
 					switch (GameSettings.playerChoice) {
 
 					case 1:
-						GCompleteProgram.completed = false; // si on met pas �a on rentre jamais dans la boucle apr�s la
-															// premi�re iteration
+						GCompleteProgram.completed = false;
+
 						while (!GCompleteProgram.completed) {
 
 							p.program.completeProgram(p);
@@ -182,13 +184,8 @@ public class Main {
 						GBugPlayer.done = false;
 					}
 
-					// pour test
-					board.printBoard();
-
 					// if the player is in ranking this means he just reached a jewel, no need to
-					// ask him
-					// what to do with his cards
-					// if there are no more cards to draw, same.
+					// ask him what to do with his cards if there are no more cards to draw, same.
 
 					if (p.hand.size() != 0 && !GameSettings.ranking.contains(p)) {
 						p.endTurnChoice();
@@ -208,18 +205,19 @@ public class Main {
 						break;
 
 					case 2:
-						// rien
+						// nothing
 						break;
 					}
 
 					if (p.deck.size() < (5 - p.hand.size())) {
-						// on transfere la pile de discard vers la pioche s'il reste moins
-						// de carte dans la pioche que de carte � piocher
+						// if there are no more cards in the main deck
 						p.discardDeckToDeck();
-						System.out.println("Transfert de cartes");
+						
 					}
 
 					if (p.deck.size() == 0 && p.discardDeck.size() == 0) {
+						// if there are no more cards in the main deck nor in the discard deck, it shows
+						// an error window
 						GErrorNoMoreCards.closed = false;
 						new GErrorNoMoreCards();
 
@@ -231,10 +229,6 @@ public class Main {
 					else {
 						p.drawCards();
 					}
-
-					System.out.println("Main " + p.hand.size());
-					System.out.println("Pioche " + p.deck.size());
-					System.out.println("Discard " + p.discardDeck.size());
 
 				}
 			}

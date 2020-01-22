@@ -16,10 +16,11 @@ public class GBoard extends Canvas {
 	/**
 	 * 
 	 */
-	
-	//to avoid a warning on GBoard
+
+	// to avoid a warning on GBoard
 	private static final long serialVersionUID = 1L;
-	
+
+	// in this array we store all the positions to place tiles on the board
 	public static int[] giPosistions = { 45, 146, 247, 349, 450, 551, 653, 754, };
 	public static JFrame f = new JFrame("Robot Turtles Java Edition");
 	public static GBoard m = new GBoard();
@@ -32,6 +33,8 @@ public class GBoard extends Canvas {
 		Image background = t.getImage("src/images/Background.png");
 		g.drawImage(background, 0, 0, this);
 
+		// we check all the cell in the board and when there's an object in it we put it
+		// on the graphic interface
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (board[i][j].getClass() == TurtleTile.class) {
@@ -52,7 +55,7 @@ public class GBoard extends Canvas {
 					Image im = t.getImage("src/images/StoneWall.png");
 					g.drawImage(im, giPosistions[j], giPosistions[i], this);
 				}
-				
+
 				else if (board[i][j].getClass() == IceWall.class) {
 					Image im = t.getImage("src/images/IceWall.png");
 					g.drawImage(im, giPosistions[j], giPosistions[i], this);
@@ -62,6 +65,11 @@ public class GBoard extends Canvas {
 
 		}
 
+		// if the player is using the laser, we put the animation at the right place on
+		// the board
+
+		// it is very important in the gif image settings to have it only run once, to
+		// avoid bugs
 		if (GameSettings.drawLaser) {
 
 			if (GameSettings.laserGIPosition[0] >= 0 && GameSettings.laserGIPosition[0] < 8
@@ -83,18 +91,19 @@ public class GBoard extends Canvas {
 			}
 
 		}
-		// next part is very important
+		// next part is important
 		else {
 			Image laser = t.getImage("src/images/Laser/" + GameSettings.laserOrientation + ".gif");
 			g.drawImage(laser, -1000, -1000, this);
-			laser.flush(); // the flush is necesary to reset the loop counter of the gif because it runs
-							// only onceto avoid other bugs
+			laser.flush(); // the flush is necessary to reset the loop counter of the gif because it runs
+							// only once to avoid other bugs
 		}
 
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-
+	
+	//method to update the board when a player runs its program
 	public static void updateGI() {
 		f.getContentPane().removeAll();
 		f.repaint();
@@ -104,6 +113,7 @@ public class GBoard extends Canvas {
 
 	}
 
+	//initialization
 	public static void initializeBoardGI() {
 		f.add(m);
 		f.setSize(917, 949);
